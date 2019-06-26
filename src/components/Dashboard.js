@@ -1,11 +1,16 @@
 import React from "react";
 import withFirebaseContext from "../Firebase/withFirebaseContext";
 import TwitterTimeline from "./TwitterTimeline";
+import { flexbox } from "@material-ui/system";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { annonces: [] };
+    this.state = { 
+      annonces: [],
+      userInfo: '',
+      error: null,
+    };
   }
   componentDidMount() { }
 
@@ -27,17 +32,50 @@ class Dashboard extends React.Component {
     // });
   };
 
+  componentDidMount() {
+    const { firestore } = this.props;
+    let docRef;
+    if (localStorage.getItem('userId')) {
+      docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      this.getInfo(docRef);
+    } else {
+      const { auth } = this.props;
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          docRef = firestore.doc(`usersinfo/${user.uid}`);
+          this.getInfo(docRef);
+        }
+      });
+    }
+  }
+
+  getInfo = (docRef) => {
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const userInfo = doc.data();
+        this.setState({
+          userInfo,
+        });
+      }
+    }).catch((error) => {
+      this.setState({ error });
+    });
+  }
+
   render() {
-    const { annonces } = this.state;
+    const { annonces, userInfo } = this.state;
     return (
       <div>
+        <h1>Hello {userInfo.name} </h1> 
         <div>
           {annonces.map(annonces => (
             <div>{annonces.nom} </div>
           ))}
 
         </div>
-        <div>
+        <div style={{ 
+          display: "flex",
+          justifyContent: "center", }}>
           <TwitterTimeline />
         </div>
       </div>
