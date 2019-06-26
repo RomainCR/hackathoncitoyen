@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import FirebaseProvider from './Firebase/FirebaseProvider';
+import { HashRouter, Switch, Route } from 'react-router-dom';
+import Dashboard from './components/Dashboard';
+import Welcome from './components/connexion/Welcome';
+import Connect from './components/connexion/Connect';
+import Signin from './components/connexion/Signin';
+import PasswordForget from './components/connexion/PasswordForget';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () => (
+  <div className="App">
+    <FirebaseProvider>
+      <HashRouter>
+        <Switch>
+        <Route exact path="/" component={Welcome} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/signin" component={Signin} />
+        <Route path="/connect" component={Connect} />
+        <Route path="/reset" component={PasswordForget} />
+        </Switch>
+      </HashRouter>
+    </FirebaseProvider>
+  </div>
+);
+
 
 export default App;
