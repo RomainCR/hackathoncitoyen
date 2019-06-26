@@ -15,12 +15,12 @@ const App = () => (
     <FirebaseProvider>
       <HashRouter>
         <Switch>
+          <Route exact path="/" component={Welcome} />
           <Route path="/createAnnonce" component={CreateAnnonce} />
-        <Route exact path="/" component={Welcome} />
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/signin" component={Signin} />
-        <Route path="/connect" component={Connect} />
-        <Route path="/reset" component={PasswordForget} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/connect" component={Connect} />
+          <Route path="/reset" component={PasswordForget} />
         </Switch>
       </HashRouter>
     </FirebaseProvider>

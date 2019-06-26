@@ -1,12 +1,13 @@
 import React from "react";
 import withFirebaseContext from "../Firebase/withFirebaseContext";
+import TwitterTimeline from "./TwitterTimeline";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { annonces: [] };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   getAnnounceFromDB = () => {
     const { firestore } = this.props;
@@ -21,7 +22,7 @@ class Dashboard extends React.Component {
           annonces.push(value);
         }
       });
-  //  this.setState({
+    //  this.setState({
     //  annonces: annonces
     // });
   };
@@ -30,10 +31,15 @@ class Dashboard extends React.Component {
     const { annonces } = this.state;
     return (
       <div>
-        <p>Hello</p>
-        {annonces.map(annonces => (
-          <div>{annonces.nom} </div>
-        ))}
+        <div>
+          {annonces.map(annonces => (
+            <div>{annonces.nom} </div>
+          ))}
+
+        </div>
+        <div>
+          <TwitterTimeline />
+        </div>
       </div>
     );
   }
