@@ -84,7 +84,7 @@ class CreateAnnonce extends React.Component {
   };
 
   render() {
-    const { description, errorMessage, currentValue, points, thématiquelist, thématique, titre } = this.state;
+    const { description, errorMessage,  points, thématiquelist, thématique, titre } = this.state;
     return (
       <div>
         {" "}
