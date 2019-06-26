@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
     const { annonces } = this.state;
     return (
       <div>
+        <p>Hello</p>
         {annonces.map(annonces => (
           <div>{annonces.nom} </div>
         ))}
