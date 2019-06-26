@@ -25,7 +25,7 @@ class Connect extends Component {
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         const { history } = this.props;
-        history.push('mydashboard');
+        history.push('/dashboard');
       })
       .catch((error) => {
         this.setState({ error });
@@ -45,9 +45,10 @@ class Connect extends Component {
 
     return (
       <>
+        <h1>Se connecter</h1>
         <form onSubmit={this.onSubmit}>
           <Grid container>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 required
                 name="email"
@@ -58,7 +59,7 @@ class Connect extends Component {
                 style={{ marginTop: '5%', width: '50%' }}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 required
                 name="password"
@@ -70,18 +71,19 @@ class Connect extends Component {
                 style={{ marginTop: '5%', width: '50%' }}
               />
             </Grid>
+            <Grid item xs={12}>
+              <Button
+                size="large"
+                style={{marginTop: '8%'}}
+                disabled={isInvalid}
+                type="submit"
+                variant="contained"
+                className="Button"
+              >
+                Se connecter
+              </Button>
+            </Grid>
           </Grid>
-          <Button
-            size="large"
-            disabled={isInvalid}
-            type="submit"
-            color="primary"
-            variant="contained"
-            style={{ position: 'fixed center', marginTop: '8%', borderRadius: '20px' }}
-            className="Button"
-          >
-            Se connecter
-          </Button>
           {error && <p>{error.message}</p>}
         </form>
         <p><Link to="/reset">Mot de passe oublié?</Link></p>
