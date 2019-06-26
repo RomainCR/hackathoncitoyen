@@ -11,8 +11,10 @@ const TwitterTimeline = () => (
       options={{
         height: 600,
         witdh: 400,
-         }}
-      data-chrome='transparent'
+      }}
+    />
+    <TwitterHashtagButton
+      tag={'lyon'}
     />
   </div>
 );
