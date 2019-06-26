@@ -10,7 +10,7 @@ const TwitterTimeline = () => (
       theme="dark"
       options={{
         height: 600,
-        witdh: 400,
+        witdh: 600,
       }}
     />
     <TwitterHashtagButton
