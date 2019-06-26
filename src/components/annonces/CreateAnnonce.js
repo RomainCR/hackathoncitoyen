@@ -2,12 +2,13 @@ import React from "react";
 import withFirebaseContext from "../../Firebase/withFirebaseContext";
 import SelectField from "./SelectFields"
 import TextField from "@material-ui/core/TextField";
+import Button from '@material-ui/core/Button'
 class CreateAnnonce extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       errorMessage: "",
-      name : '',
+      titre : '',
       description : '',
       thématique : [],
       points : 0,
@@ -36,10 +37,10 @@ class CreateAnnonce extends React.Component {
   };
   sendAnnounce = () => {
     const { firestore } = this.props;
-    const { name, description, thématique, points } = this.state;
+    const { titre, description, thématique, points } = this.state;
     const annonceRef = firestore.collection("annonces").doc();
     annonceRef.set({
-      name,
+      titre,
       description,
       thématique,
       createur: localStorage.getItem("userId"),
@@ -48,8 +49,8 @@ class CreateAnnonce extends React.Component {
   };
 
   allStateAreFill = () => {
-    const { name, description, thématique, points } = this.state;
-    if (name && description && thématique && points) {
+    const { titre, description, thématique, points } = this.state;
+    if (titre && description && thématique && points) {
       return true;
     }
     this.setState({
@@ -83,22 +84,37 @@ class CreateAnnonce extends React.Component {
   };
 
   render() {
-    const { description, errorMessage, currentValue, points, thématiquelist, thématique } = this.state;
+    const { description, errorMessage, currentValue, points, thématiquelist, thématique, titre } = this.state;
     return (
       <div>
         {" "}
         <h1>Créer une annonce</h1>{" "}
+        <div>  
+        <TextField
+          required
+          id="filled-multiline-flexible"
+          label="titre"
+          value={titre}
+         
+          rows="1"
+          onChange={this.handleChange("titre")}
+          className="textField"
+         
+        /></div>
+        <div>
         <TextField
           required
           id="filled-multiline-flexible"
           label="Description"
           value={description}
           multiline
-          rows="5"
+          rows="2"
           onChange={this.handleChange("description")}
           className="textField"
-          style={{ marginTop: "2%", marginBottom: "5%", width: "50%" }}
-        />
+          style={{ marginTop: "2%", marginBottom: "5%", width: "30%" }}
+        /></div>
+
+        <div> 
         <TextField
           required
           id="filled-multiline-flexible"
@@ -107,14 +123,17 @@ class CreateAnnonce extends React.Component {
           rows="1"
           onChange={this.handleChange("points")}
           className="textField"
-        />
-        <p>{errorMessage}</p>
+        /></div>
+        <div> 
+        <p>{errorMessage}</p> </div>
+        <div>
         <SelectField
           name={"thématique"}
           choices={thématiquelist}
           handleChange={this.handleChange}
           value={thématique}
-        />
+        /> </div>
+        <Button onClick={() => {this.sendAnnounce()}} >Publier </Button>
       </div>
     );
   }
