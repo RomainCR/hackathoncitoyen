@@ -6,6 +6,7 @@ import Welcome from './components/connexion/Welcome';
 import Connect from './components/connexion/Connect';
 import Signin from './components/connexion/Signin';
 import PasswordForget from './components/connexion/PasswordForget';
+import CreateAnnonce from './components/annonces/CreateAnnonce'
 import './App.css';
 
 
@@ -14,6 +15,7 @@ const App = () => (
     <FirebaseProvider>
       <HashRouter>
         <Switch>
+          <Route path="/createAnnonce" component={CreateAnnonce} />
         <Route exact path="/" component={Welcome} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/signin" component={Signin} />
