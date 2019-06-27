@@ -12,7 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 
-const goodCode = "1234"
+const goodCode = '1234';
 
 class Signin extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class Signin extends Component {
   };
 
   isAgent = (event) => {
-    if (event.target.value === "oui") {
+    if (event.target.value === 'oui') {
       this.setState({ isAgent: true });
     } else {
       this.setState({ isAgent: false });
@@ -58,7 +58,7 @@ class Signin extends Component {
             this.setState({ error });
           });
       } else {
-        this.setState({ error: "Code administratif invalide" })
+        this.setState({ error: 'Code administratif invalide' })
       }
     } else {
       auth.createUserWithEmailAndPassword(email, passwordOne)

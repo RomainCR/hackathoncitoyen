@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     maxWidth: '15%',
 
     display: "inline",
-    
+
   },
   media: {
     height: 140,
@@ -20,19 +20,21 @@ const useStyles = makeStyles({
 
 export default function UntouchableCard(props) {
   const classes = useStyles();
-console.log(props)
+  const { user } = props;
   return (
     <Grid item xs={12} >
-    <Card className={classes.card}>
+      <Card className={classes.card}>
 
-     
+
         <CardMedia
           className={classes.media}
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"
-         
+          image=
+          {user.url
+            ? user.url
+            : 'https://via.placeholder.com/200x100.png'
+          }
         />
-     
-    </Card>
+      </Card>
     </Grid>
   );
 }

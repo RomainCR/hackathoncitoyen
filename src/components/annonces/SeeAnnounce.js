@@ -128,7 +128,7 @@ class SeeAnnounce extends Component {
           <>
             {" "}
             <p style={{ marginTop: "20px" }}>{annonce[0].titre}</p>{" "}
-            <UntouchableCard />
+            <UntouchableCard user={user}/>
             <p style={{ marginTop: "20px" }}>
               {annonce[0].points}{" "}
               <img

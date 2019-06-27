@@ -11,13 +11,13 @@ class CreateAnnonceUser extends React.Component {
       errorMessage: "",
       titre: "",
       description: "",
-      thématique: [],
-      thématiquelist: []
+      thematique: [],
+      thematiquelist: []
     };
   }
 
   componentDidMount() {
-    this.getThématiqueFromDB();
+    this.getthematiqueFromDB();
   }
 
   handleChange = name => event => {
@@ -25,20 +25,20 @@ class CreateAnnonceUser extends React.Component {
   };
   sendAnnounce = () => {
     const { firestore } = this.props;
-    const { titre, description, thématique } = this.state;
+    const { titre, description, thematique } = this.state;
     const annonceRef = firestore.collection("annoncesUser").doc();
     annonceRef.set({
       titre,
       description,
-      thématique,
+      thematique,
       createur: localStorage.getItem("userId"),
       postulants : []
     });
   };
 
   allStateAreFill = () => {
-    const { titre, description, thématique } = this.state;
-    if (titre && description && thématique) {
+    const { titre, description, thematique } = this.state;
+    if (titre && description && thematique) {
       return true;
     }
     this.setState({
@@ -52,21 +52,21 @@ class CreateAnnonceUser extends React.Component {
     }
   }
 
-  getThématiqueFromDB = () => {
+  getthematiqueFromDB = () => {
     const { firestore } = this.props;
 
-    const themRef = firestore.collection("category").doc("thématique");
-    const thématique = [];
+    const themRef = firestore.collection("category").doc("thematique");
+    const thematique = [];
     themRef.get().then(document => {
       const dbCategory = document.data();
 
       for (const [, value] of Object.entries(dbCategory)) {
-        thématique.push(`${value}`);
+        thematique.push(`${value}`);
         console.log(value);
       }
 
       this.setState({
-        thématiquelist: thématique
+        thematiquelist: thematique
       });
     });
   };
@@ -76,8 +76,8 @@ class CreateAnnonceUser extends React.Component {
       description,
       errorMessage,
 
-      thématiquelist,
-      thématique,
+      thematiquelist,
+      thematique,
       titre
     } = this.state;
     return (
@@ -113,10 +113,10 @@ class CreateAnnonceUser extends React.Component {
         </div>
         <div>
           <SelectField
-            name={"thématique"}
-            choices={thématiquelist}
+            name={"thematique"}
+            choices={thematiquelist}
             handleChange={this.handleChange}
-            value={thématique}
+            value={thematique}
           />{" "}
         </div>
         <Button

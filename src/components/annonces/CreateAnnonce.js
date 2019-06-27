@@ -12,16 +12,16 @@ class CreateAnnonce extends React.Component {
       errorMessage: '',
       titre: '',
       description: '',
-      thématique: [],
+      thematique: [],
       points: '',
-      thématiquelist: [],
+      thematiquelist: [],
       url: '',
     };
   }
 
 
   componentDidMount() {
-    this.getThématiqueFromDB();
+    this.getthematiqueFromDB();
   }
 
   handleChange = name => (event) => {
@@ -50,7 +50,7 @@ class CreateAnnonce extends React.Component {
       url,
       titre,
       description,
-      thématique,
+      thematique,
       points,
     } = this.state;
     const annonceRef = firestore.collection('annonces').doc();
@@ -58,7 +58,8 @@ class CreateAnnonce extends React.Component {
       url,
       titre,
       description,
-      thématique,
+      postulants: [],
+      thematique,
       createur: localStorage.getItem('userId'),
       points,
     });
@@ -78,10 +79,10 @@ class CreateAnnonce extends React.Component {
     const {
       titre,
       description,
-      thématique,
+      thematique,
       points,
     } = this.state;
-    if (titre && description && thématique && points) {
+    if (titre && description && thematique && points) {
       return true;
     }
     this.setState({
@@ -90,21 +91,18 @@ class CreateAnnonce extends React.Component {
     return false;
   };
 
-  getThématiqueFromDB = () => {
+  getthematiqueFromDB = () => {
     const { firestore } = this.props;
 
-    const themRef = firestore.collection('category').doc('thématique');
-    const thématique = [];
+    const themRef = firestore.collection('category').doc('thematique');
+    const thematique = [];
     themRef.get().then((document) => {
       const dbCategory = document.data();
-
       for (const [, value] of Object.entries(dbCategory)) {
-        thématique.push(`${value}`);
-      
+        thematique.push(`${value}`);
       }
-
       this.setState({
-        thématiquelist: thématique,
+        thematiquelist: thematique,
       });
     });
   };
@@ -120,8 +118,8 @@ class CreateAnnonce extends React.Component {
       description,
       errorMessage,
       points,
-      thématiquelist,
-      thématique,
+      thematiquelist,
+      thematique,
       titre,
     } = this.state;
     return (
@@ -170,10 +168,10 @@ class CreateAnnonce extends React.Component {
         </div>
         <div>
           <SelectField
-            name={'thématique'}
-            choices={thématiquelist}
+            name={'thematique'}
+            choices={thematiquelist}
             handleChange={this.handleChange}
-            value={thématique}
+            value={thematique}
           />
         </div>
         <Button
