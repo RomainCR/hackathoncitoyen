@@ -103,9 +103,6 @@ class infoUser extends Component {
     return (
       <Grid container justify="center">
         <Grid item xs={12}>
-          <Coins position="center" userInfo={userInfo} />
-        </Grid>
-        <Grid item xs={12}>
           {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>
         <div style={{ border: '2px solid black', borderRadius: "10px" }}>
