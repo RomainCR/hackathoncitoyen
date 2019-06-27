@@ -9,17 +9,17 @@ const useStyles = makeStyles({
     margin: 10,
     width: 150,
     height: 150,
-    marginTop: 80
+    marginTop: 20,
   },
 });
 
-export default function ImageAvatars() {
+export default function ImageAvatars({ img }) {
   const classes = useStyles();
 
   return (
     <Grid container justify="center" alignItems="center">
      
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" className={classes.bigAvatar} />
+      <Avatar alt="Remy Sharp" src={img} className={classes.bigAvatar} />
     </Grid>
   );
 }

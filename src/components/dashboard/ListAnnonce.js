@@ -11,13 +11,35 @@ const ListAnnonce = props => {
     const { history } = props
     history.push(`annonce/${props.annonce.id}`)
   }
-  console.log(props)
+
+  const putImage = (annonce) => {
+    console.log(annonce)
+    if(annonce.data.thématique === "Nature et jardinage") {
+      return 'https://i.ibb.co/VpJjRmK/picto00.png'
+    }
+    if (annonce.data.thématique === "Ecologie et nettoyage"){
+    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+
+    if (annonce.data.thématique === "Loisir et divertissement") {
+        return 'https://i.ibb.co/N97WymJ/picto04.png'
+    }
+    if (annonce.data.thématique === "Aide à la personne") {
+return 'https://i.ibb.co/M2cQ6S3/picto05.png'
+    }
+    if (annonce.data.thématique === "Réparation et bricolage") {
+return 'https://i.ibb.co/JvXZHR5/picto.png'
+    }
+    if (annonce.data.thématique === "Education") {
+      return 'https://i.ibb.co/kJ95cSp/picto15.png'
+    }
+  }
+  
   return (
     <>
       <Grid item xs={6}>
       <Card> 
-        <CardActionArea onClick={() => {redirectToAnnounce()}}>  <CardMedia style={{ height: "160px", width: '180px' }}
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"/> 
+        <CardActionArea onClick={() => {redirectToAnnounce()}}>  <CardMedia style={{ height: "250px", width: '250px' }}
+          image={putImage(props.annonce)}/> 
        </CardActionArea></Card>
       </Grid>{" "}
       <Grid item xs={6}>

@@ -13,7 +13,6 @@ const CompIcons = () => {
         
         <TextField
             disabled
-         
             rows="1"
             style={{
               border: "2px solid black",
