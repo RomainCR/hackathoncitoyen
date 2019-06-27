@@ -1,9 +1,31 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import ImageAnonceUpload from './ImageAnnonceUpoad';
 import SelectField from './SelectFields';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import { Container } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  dense: {
+    marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 200,
+  },
+}));
 
 class CreateAnnonce extends React.Component {
   constructor(props) {
@@ -12,13 +34,12 @@ class CreateAnnonce extends React.Component {
       errorMessage: '',
       titre: '',
       description: '',
-      thématique: [],
+      thématique: '',
       points: '',
       thématiquelist: [],
       url: '',
     };
   }
-
 
   componentDidMount() {
     this.getThématiqueFromDB();
@@ -36,7 +57,7 @@ class CreateAnnonce extends React.Component {
       });
     }
     if (name !== 'points') {
-      this.setState({ [name]: event.target.value });
+      this.setState({ thématique: event.target.value });
     }
   };
 
@@ -127,40 +148,42 @@ class CreateAnnonce extends React.Component {
     return (
       <div>
         <h1>Créer une annonce</h1>
+        <ImageAnonceUpload getImage={this.getImage} />
+        <TextField
+          required
+          id="outlined-required"
+          label="Titre"
+          defaultValue="Hello World"
+          // style={{marginLeft: 1, marginRight: 1}}
+          margin="normal"
+          variant="outlined"
+          value={titre}
+          onChange={this.handleChange('titre')}
+        />
         <div>
-          <ImageAnonceUpload getImage={this.getImage} />
           <TextField
             required
-            id="filled-multiline-flexible"
-            label="titre"
-            value={titre}
-            rows="1"
-            onChange={this.handleChange('titre')}
-            className="textField"
-          />
-        </div>
-        <div>
-          <TextField
-            required
-            id="filled-multiline-flexible"
+            id="outlined-multiline-static"
             label="Description"
             value={description}
             multiline
-            rows="2"
+            rows="5"
+            defaultValue="Default Value"
+            margin="normal"
+            variant="outlined"
             onChange={this.handleChange('description')}
-            className="textField"
-            style={{ marginTop: '2%', marginBottom: '5%', width: '30%' }}
           />
         </div>
         <div>
           <TextField
             required
+            id="outlined-required"
             label="Points"
+            defaultValue="Hello World"
+            margin="normal"
+            variant="outlined"
             value={points}
-            rows="1"
-            id="formatted-numberformat-input"
             onChange={this.handleChange('points')}
-            className="textField"
           />
         </div>
         <div>
@@ -170,7 +193,7 @@ class CreateAnnonce extends React.Component {
         </div>
         <div>
           <SelectField
-            name={thématique}
+            name="Thématique"
             choices={thématiquelist}
             handleChange={this.handleChange}
             value={thématique}
