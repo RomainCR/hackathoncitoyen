@@ -69,7 +69,7 @@ class SpendCredit extends Component {
         <p>Dépenser vos crédits</p>
         <Coins position="center" userInfo={userInfo} />
         <Grid container>
-          {items ? items.map(item => <ItemList item={item} />) : null}{" "}
+          {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}{" "}
         </Grid>
       </div>
     );

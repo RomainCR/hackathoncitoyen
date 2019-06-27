@@ -5,3 +5,7 @@
 body {
   background-color: #67AFCB;
 }
+
+.input-group {
+  margin: 10px;
+}
