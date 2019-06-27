@@ -31,12 +31,10 @@ const App = () => (
           <Route path="/changeprofile" component={ChangeProfile} />
           <Route path="/agentprofile" component={agentProfile} />
           <Route path="/home" component={Home} />
-          <Route path="/home" component={Home} />
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
-          <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
         </Switch>

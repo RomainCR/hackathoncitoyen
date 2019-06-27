@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 class PublicProfil extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {}
   }
-  render() { 
-    return (  );
+
+  render() {
+    return (
+      <div>hello</div>
+    );
   }
 }
- 
+
 export default PublicProfil;
