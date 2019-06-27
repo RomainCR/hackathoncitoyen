@@ -11,8 +11,9 @@ class ChangeProfile extends Component {
     this.state = {
       name: '',
       email: '',
-      city: '',
+      adress: '',
       bio: '',
+      competences: '',
     };
   }
 
@@ -38,7 +39,7 @@ class ChangeProfile extends Component {
   onSubmit = (event) => {
     const { firestore } = this.props;
     const {
-      name, email, city, bio,
+      name, email, adress, bio,
     } = this.state;
 
     if (name) {
@@ -51,9 +52,9 @@ class ChangeProfile extends Component {
         email,
       }, { merge: true });
     }
-    if (city) {
+    if (adress) {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
-        city,
+        adress,
       }, { merge: true });
     }
     if (bio) {
@@ -69,7 +70,7 @@ class ChangeProfile extends Component {
 
   render() {
     const {
-      name, email, city, bio,
+      name, email, adress, bio,
     } = this.state;
 
     return (
@@ -77,7 +78,7 @@ class ChangeProfile extends Component {
         <ArrowBack
           style={{ position: 'fixed', left: '10px', top: '10px' }}
           onClick={() => {
-            this.redirect('/profile');
+            this.redirect('/myprofile');
           }}
         />
         <h1>Modifier mes informations personnelles</h1>
@@ -90,7 +91,7 @@ class ChangeProfile extends Component {
             name="name"
             onChange={this.onChange}
             value={name}
-            label="Full Name"
+            label="Nom et prénom"
             className="textfield"
             style={{ marginTop: '5%', width: '50%' }}
           />
@@ -112,10 +113,10 @@ class ChangeProfile extends Component {
         <div>
           <TextField
             id="standard-name"
-            name="city"
+            name="Adresse postale"
             onChange={this.onChange}
-            value={city}
-            label="Ville"
+            value={adress}
+            label="Adresse postale"
             className="textfield"
             style={{ marginTop: '5%', width: '50%' }}
           />
@@ -134,7 +135,6 @@ class ChangeProfile extends Component {
             style={{ marginTop: '5%', width: '50%' }}
           />
         </div>
-
         <Button
           variant="outlined"
           name="changeprofile"
