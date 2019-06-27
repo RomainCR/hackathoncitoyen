@@ -18,35 +18,7 @@ const useStyles = makeStyles({
 
 function ImgAvatar(props) {
   const classes = useStyles();
-  const [userInfo, setInfo] = useState({});
-  const { history, firestore } = props;
-
-  const getInfo = (docRef) => {
-    docRef.get().then((doc) => {
-      if (doc.exists) {
-        const info = doc.data();
-        setInfo(info);
-      }
-    });
-  };
-
-  useEffect(() => {
-    let docRef;
-    if (localStorage.getItem('userId')) {
-      docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
-      getInfo(docRef);
-      console.log('hello')
-    } else {
-      const { auth } = this.props;
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          docRef = firestore.doc(`usersinfo/${user.uid}`);
-          getInfo(docRef);
-        }
-      });
-    }
-  }, [userInfo.length, firestore]);
-
+  const { history, userInfo } = props;
 
 
   return (
