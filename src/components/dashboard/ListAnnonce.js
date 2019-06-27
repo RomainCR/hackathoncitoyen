@@ -15,21 +15,22 @@ const ListAnnonce = props => {
   const putImage = (annonce) => {
     console.log(annonce)
     if(annonce.data.thématique === "Nature et jardinage") {
-      return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-capture-da-ei-cran-2019-06-26-ai-20-07-34.png'
+      return 'https://i.ibb.co/VpJjRmK/picto00.png'
     }
     if (annonce.data.thématique === "Ecologie et nettoyage"){
-    return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto01.png'}
+    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+
     if (annonce.data.thématique === "Loisir et divertissement") {
-        return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto04.png'
+        return 'https://i.ibb.co/N97WymJ/picto04.png'
     }
     if (annonce.data.thématique === "Aide à la personne") {
-return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto05.png'
+return 'https://i.ibb.co/M2cQ6S3/picto05.png'
     }
     if (annonce.data.thématique === "Réparation et bricolage") {
-return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto02.png'
+return 'https://i.ibb.co/JvXZHR5/picto.png'
     }
     if (annonce.data.thématique === "Education") {
-      return 'https://cdn.discordapp.com/attachments/593438579821248535/593691635422986250/picto15.png'
+      return 'https://i.ibb.co/kJ95cSp/picto15.png'
     }
   }
   

@@ -30,11 +30,14 @@ class SpendCredit extends Component {
         });
       });
   };
+
+  
+  
   render() {
     const { items } = this.state;
     return (
       <div>
-        <Avatar></Avatar>
+        <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
         <p>Dépenser vos crédits</p>
         <h1>àrécupererdeladb</h1>
         <Grid container>
