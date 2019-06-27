@@ -23,6 +23,7 @@ export default function UntouchableCard(props) {
 console.log(props)
   return (
     <Grid item xs={12} >
+  
     <Card className={classes.card}>
 
      

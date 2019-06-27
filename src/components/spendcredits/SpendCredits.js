@@ -66,7 +66,7 @@ class SpendCredit extends Component {
     return (
       <div>
         <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
-        <p>Dépenser vos crédits</p>
+        <p>Un gros merci pour votre aide, ainsi que votre dévouement... les habitants de notre ville ont de plus en plus besoin de votre positivisme ainsi que de votre implication, ainsi ils peuvent constater qu’avec du bon vouloir, google et de la volonté, ils  peuvent eux aussi contribuer à un avenir meilleur... Bravo!</p> <p>Greug Petit, Maire d'une ville paumée</p>
         <Coins position="center" userInfo={userInfo} />
         <Grid container>
           {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}{" "}
