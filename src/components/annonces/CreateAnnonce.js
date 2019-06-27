@@ -3,6 +3,7 @@ import withFirebaseContext from "../../Firebase/withFirebaseContext";
 import SelectField from "./SelectFields"
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
 class CreateAnnonce extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +12,7 @@ class CreateAnnonce extends React.Component {
       titre : '',
       description : '',
       thématique : [],
-      points : 0,
+      points : '',
       thématiquelist : []
     };
   }
@@ -24,14 +25,16 @@ class CreateAnnonce extends React.Component {
   handleChange = name => event => {
     
     if (name === 'points') {
-      if (typeof event.target.value === 'number') {
-        this.setState({ [name]: event.target.value });
+      console.log('test')
+      const value = event.target.value.replace(/[^\d]/g, '');
+
+        this.setState({ [name]: value });
       } else {
         this.setState({
           errorMessage: "Veuillez entrer un nombre"
         });
       }
-    } else {
+     if (name !== 'points') {
       this.setState({ [name]: event.target.value });
     }
   };
@@ -47,6 +50,18 @@ class CreateAnnonce extends React.Component {
       points
     });
   };
+  sendFree = () => {
+    const { firestore } = this.props;
+    const { titre, description, thématique, points } = this.state;
+    const annonceRef = firestore.collection("FreeItem").doc();
+    annonceRef.set({
+      nom : (Math.floor(Math.random() * 50000)),
+      description: (Math.floor(Math.random() * 50000)),
+      prix: (Math.floor(Math.random() * 50000))
+     
+    });
+  };
+  
 
   allStateAreFill = () => {
     const { titre, description, thématique, points } = this.state;
@@ -93,7 +108,7 @@ class CreateAnnonce extends React.Component {
         <TextField
           required
           id="filled-multiline-flexible"
-          label="titre"
+          label="titre" 
           value={titre}
          
           rows="1"
@@ -117,10 +132,11 @@ class CreateAnnonce extends React.Component {
         <div> 
         <TextField
           required
-          id="filled-multiline-flexible"
+        
           label="Points"
           value={points}
           rows="1"
+          id="formatted-numberformat-input"
           onChange={this.handleChange("points")}
           className="textField"
         /></div>
