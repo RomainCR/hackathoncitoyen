@@ -7,29 +7,16 @@ import Button from '@material-ui/core/Button';
 class PublicProfil extends Component {
   constructor(props) {
     super(props);
+    const { match } = this.props;
+    this.user = match.params.uid;
     this.state = {
-      userInfo: {}
+      userInfo: {},
     };
   }
 
   componentDidMount() {
     const { firestore } = this.props;
-    let docRef;
-    if (localStorage.getItem('userId')) {
-      docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
-      this.getInfo(docRef);
-    } else {
-      const { auth } = this.props;
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          docRef = firestore.doc(`usersinfo/${user.uid}`);
-          this.getInfo(docRef);
-        }
-      });
-    }
-  }
-
-  getInfo = (docRef) => {
+    const docRef = firestore.doc(`usersinfo/${this.user}`);
     docRef.get().then((doc) => {
       if (doc.exists) {
         const userInfo = doc.data();
@@ -39,6 +26,7 @@ class PublicProfil extends Component {
       }
     });
   }
+
 
   render() {
     const { userInfo } = this.state;
