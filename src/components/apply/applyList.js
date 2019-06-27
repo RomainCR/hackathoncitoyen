@@ -46,6 +46,8 @@ class ApplyList extends Component {
         );}
     }
     this.setState({match})
+
+    
   }
 
   render() {   const { match } = this.state    
