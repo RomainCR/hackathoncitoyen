@@ -53,7 +53,7 @@ class MyProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });

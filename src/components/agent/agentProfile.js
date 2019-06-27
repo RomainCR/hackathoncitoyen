@@ -47,7 +47,7 @@ class agentProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });
@@ -57,6 +57,24 @@ class agentProfile extends Component {
     const { userInfo, error } = this.state;
     return (
       <div>
+        <div style={{
+          border: '2px solid black',
+          borderRadius: "10px",
+          backgroundColor: "#e6e6e6",
+          margin: "20px",
+          padding: "20px",
+        }}>
+          <p>
+            Hello
+            {' '}
+            {userInfo && userInfo.name}
+          </p>
+          <p>
+            Votre email :
+            {' '}
+            {userInfo && userInfo.email}
+          </p>
+        </div>
         <Button
           size="large"
           type="button"
