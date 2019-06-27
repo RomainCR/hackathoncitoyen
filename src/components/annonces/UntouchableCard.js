@@ -23,8 +23,8 @@ export default function UntouchableCard(props) {
   const { user } = props;
   return (
     <Grid item xs={12} >
-      <Card className={classes.card}>
-
+  
+    <Card className={classes.card}>
 
         <CardMedia
           className={classes.media}

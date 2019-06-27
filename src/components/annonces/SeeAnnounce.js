@@ -160,7 +160,8 @@ class SeeAnnounce extends Component {
           <p> loading..</p>
         )}{" "}
         {annonce ? (
-          user[0].isAgent === false ? (
+          user[0].isAgent === false ? <>  <h1>Vous souhaitez vous investir dans la vie de votre ville ?</h1> 
+            
             <Button
               onClick={() => {
                 this.sendMyApplication();
@@ -169,7 +170,8 @@ class SeeAnnounce extends Component {
             >
               Postuler
             </Button>
-          ) : (
+            </>
+           : (
             <ApplyList id={id} annonce={annonce} />
           )
         ) : null}
