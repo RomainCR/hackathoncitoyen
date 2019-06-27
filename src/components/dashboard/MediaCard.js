@@ -7,29 +7,53 @@ import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: '15%',
+    maxWidth: '12%',
 
     display: "inline",
     
   },
   media: {
-    height: 140,
-    border: '2px solid black'
+    height: 180,
+    width: 260,
+    border: '1px solid black',
+    backgroundColor: '#C0DF81',
   },
+
+  
 });
 
 export default function MediaCard(props) {
   const classes = useStyles();
-console.log(props)
+  const putImage = (thématique) => {
+    console.log(thématique)
+    if (thématique === "Nature et jardinage") {
+      return  'https://i.ibb.co/VpJjRmK/picto00.png'
+    }
+    if (thématique === "Ecologie et nettoyage"){
+    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+
+    if (thématique === "Loisir et divertissement") {
+        return 'https://i.ibb.co/N97WymJ/picto04.png'
+    }
+    if (thématique === "Aide à la personne") {
+return  'https://i.ibb.co/M2cQ6S3/picto05.png'
+    }
+    if (thématique === "Réparation et bricolage") {
+return 'https://i.ibb.co/JvXZHR5/picto.png'
+    }
+    if (thématique === "Education") {
+      return 'https://i.ibb.co/kJ95cSp/picto15.png'
+    }
+  }
   return (
     <Grid item xs={6} >
     <Card className={classes.card}>
-
+    {console.log(props)}
       <CardActionArea onClick={() => { props.onChoice(props.category)}}>
         <CardMedia
           className={classes.media}
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"
-         
+          image={putImage(props.category)}
+          style={{ width: '100%' }}
         />
       </CardActionArea>
     </Card>

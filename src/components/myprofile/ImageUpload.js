@@ -21,10 +21,8 @@ class ImageUpload extends Component {
     const { image } = this.state;
     const { storage, getImage } = this.props;
 
-
     storage.ref(`images/${image.name}`).put(image).then(() => {
       storage.ref('images').child(image.name).getDownloadURL().then((url) => {
-        console.log(url);
         this.setState({ url });
         getImage(url);
       })
@@ -38,10 +36,11 @@ class ImageUpload extends Component {
     const { url } = this.state;
     return (
       <div>
+        <p style={{fontWeight: 'bold'}}>Choisir une image de profil</p>
         <input type="file" onChange={this.handleChange} />
         <button type="button" onClick={this.handleUpload}>Upload</button>
         {' '}
-        <img src={url} alt="uploaded img" />
+        {url && <img style={{ width: '70%' }} src={url} alt="uploaded img" />}
       </div>
     );
   }

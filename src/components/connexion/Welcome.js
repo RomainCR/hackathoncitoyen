@@ -13,7 +13,7 @@ class Welcome extends Component {
         history.push('/dashboard');
       } else {
         const { history } = this.props;
-        history.push('/signin');
+        history.push('/home');
       }
     });
   }
