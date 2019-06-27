@@ -191,21 +191,23 @@ class Signin extends Component {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            {isAgent &&
-              <Grid item xs={12}>
-                <p>Code fourni par votre administration</p>
-                <TextField
-                  required
-                  id="code"
-                  label="Indiquer le code"
-                  name="code"
-                  className='textfield'
-                  value={code}
-                  type="password"
-                  onChange={this.onChange}
-                  style={{ marginTop: '5%', width: '50%' }}
-                />
-              </Grid>
+            {isAgent
+              && (
+                <Grid item xs={12}>
+                  <p>Code fourni par votre administration</p>
+                  <TextField
+                    required
+                    id="code"
+                    label="Indiquer le code"
+                    name="code"
+                    className='textfield'
+                    value={code}
+                    type="password"
+                    onChange={this.onChange}
+                    style={{ marginTop: '5%', width: '50%' }}
+                  />
+                </Grid>
+              )
             }
             <Grid item xs={12}>
               <Button

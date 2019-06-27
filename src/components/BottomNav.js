@@ -39,7 +39,6 @@ function BottomNav(props) {
     if (localStorage.getItem('userId')) {
       docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
       getInfo(docRef);
-      console.log('hello')
     } else {
       const { auth } = this.props;
       auth.onAuthStateChanged((user) => {

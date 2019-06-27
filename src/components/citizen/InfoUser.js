@@ -44,7 +44,8 @@ class infoUser extends Component {
     firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
       url,
     }, { merge: true });
-    getInfo();
+    const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+    getInfo(docRef);
   }
 
   onChange = (event) => {
@@ -61,14 +62,16 @@ class infoUser extends Component {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
         bio,
       }, { merge: true });
-      getInfo();
+      const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      getInfo(docRef);
     }
     if (added === 'competences' && myThematiques.length > 0) {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
         competences: myThematiques,
         hasCompetences: true,
       }, { merge: true });
-      getInfo();
+      const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      getInfo(docRef);
     }
   }
 
