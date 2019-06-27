@@ -176,7 +176,19 @@ class CreateAnnonce extends React.Component {
             value={thématique}
           />
         </div>
-        <Button onClick={() => { this.sendAnnounce(); }}>Publier </Button>
+        <Button
+          size="large"
+          type="button"
+          variant="contained"
+          style={{
+            marginBottom: '70px',
+            width: '300px',
+          }}
+          className="Button"
+          onClick={() => { this.sendAnnounce(); }}
+        >
+          Publier
+        </Button>
       </div>
     );
   }
