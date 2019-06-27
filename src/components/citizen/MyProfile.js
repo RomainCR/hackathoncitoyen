@@ -97,12 +97,12 @@ class MyProfile extends Component {
                 onClick={this.logout}
                 variant="contained"
                 style={{
-                  marginBottom: '70px',
+                  marginBottom: '80px',
                   width: '300px',
                 }}
                 className="Button"
               >
-                Log Out
+                Déconnexion
               </Button>
               {error && <p>{error.message}</p>}
             </>
