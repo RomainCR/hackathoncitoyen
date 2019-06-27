@@ -14,9 +14,9 @@ class Home extends Component {
   render() {
     return (
       <div className="home" style={{ color: 'black' }}>
-        <img style={{ marginTop: '30%' }} src="./assets/logo.png" className="logo" alt="logo" />
-        <h1 style={{ margin: '10%' }}>City helper</h1>
-        <h3 style={{ margin: '5%' }}>Help your city, help yourself</h3>
+        <img src="./assets/logo.png" className="logo" alt="logo" />
+        <h1 style={{ margin: '1%' }}>Unicity</h1>
+        <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3>
         <Grid container>
           <Grid item xs={12}>
             <Link to="/signin" style={{ textDecoration: 'none' }}>

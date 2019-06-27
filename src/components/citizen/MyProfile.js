@@ -53,7 +53,7 @@ class MyProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });
@@ -97,12 +97,12 @@ class MyProfile extends Component {
                 onClick={this.logout}
                 variant="contained"
                 style={{
-                  marginBottom: '70px',
+                  marginBottom: '80px',
                   width: '300px',
                 }}
                 className="Button"
               >
-                Log Out
+                Déconnexion
               </Button>
               {error && <p>{error.message}</p>}
             </>

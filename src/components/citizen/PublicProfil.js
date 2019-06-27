@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import InfoUser from './InfoUser';
+import InfoUserPublic from './InfoUserPublic';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
@@ -40,13 +40,13 @@ class PublicProfil extends Component {
         {mapArray.map(() => (
           <StarIcon style={{ width: '40px', height: '40px' }} />
         ))}
-        <InfoUser userInfo={userInfo} />
+        <InfoUserPublic userInfo={userInfo} />
         <a href={`mailto:${userInfo && userInfo.email}`}>
           <Button
             size="large"
             type="button"
             variant="contained"
-            style={{ marginTop: '2%' }}
+            style={{ marginTop: '2%', marginBottom: '80px' }}
             className="Button"
           >
             Contacter

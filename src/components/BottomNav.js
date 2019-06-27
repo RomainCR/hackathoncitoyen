@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Icon from '@material-ui/core/Icon';
 import Edit from '@material-ui/icons/Edit';
 import AccountBox from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import BookIcon from '@material-ui/icons/Book';
 import { withRouter } from 'react-router';
 import withFirebaseContext from '../Firebase/withFirebaseContext';
 
 const useStyles = makeStyles({
   root: {
-    marginTop:'20px',
+    marginTop: '20px',
     width: '100%',
     position: 'fixed',
     bottom: '0',
