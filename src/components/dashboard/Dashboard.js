@@ -39,8 +39,11 @@ class Dashboard extends React.Component {
           annonces,
         })
       });
-
-  };
+       this.setState({
+        annonces,
+       })
+    };
+  
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
@@ -56,8 +59,6 @@ class Dashboard extends React.Component {
       this.setState({
         thématiques,
       })
-
-
     });
   };
 
@@ -88,11 +89,10 @@ class Dashboard extends React.Component {
           userInfo,
         });
       }
-    }).catch((error) => {
-      this.setState({ error });
     });
   }
-  handleChoice = (thématique) => {
+
+handleChoice = (thématique) => {
 
     this.setState({
       choice: thématique
@@ -101,8 +101,8 @@ class Dashboard extends React.Component {
 
 
   render() {
-    const { annonces, thématiques, choice, showAll } = this.state;
-
+    const { annonces, thématiques, choice, userInfo, showAll } = this.state;
+ 
     return (
       <div>
         <button style={{ marginTop: '5%' }} onClick={() => {
@@ -111,26 +111,24 @@ class Dashboard extends React.Component {
             showAll: false,
           })
         }}>reset thématique</button>
-        <Avatar />
-        <Coins />
-        {!choice ? <> <p>Nom de l'application </p>
-          <Button onClick={() => {
-            this.setState({
-              showAll: true,
-              choice: 'all'
-            })
-          }}>Afficher toutes les annonces</Button> </> : null}
-
-
-        <Grid container >
-          {!choice ? thématiques.map(thématique => <MediaCard category={thématique} onChoice={this.handleChoice} />) : null}
-
-
-
-          {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
-        </Grid>
-
-        <div style={{
+      <Avatar userInfo={userInfo}/>
+      <Coins position="flex-end" userInfo={userInfo}/>
+       {!choice ?  <> <p>Nom de l'application </p>
+        <Button onClick={() => {this.setState({
+          showAll : true,
+          choice : 'all'
+        })}}>Afficher toutes les annonces</Button> </> : null} 
+     
+        
+        <Grid container > 
+      {!choice ?    thématiques.map(thématique =>  <MediaCard category={thématique} onChoice={this.handleChoice}/>  ) : null}
+       
+     
+        
+        {choice ? annonces.filter( annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce}/>) :  null}
+       </Grid>
+    
+        <div style={{ 
           display: "flex",
           justifyContent: "center",
         }}>
