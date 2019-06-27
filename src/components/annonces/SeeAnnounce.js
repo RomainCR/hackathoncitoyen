@@ -6,10 +6,11 @@ import Avatar from "../Avatar";
 import Coins from "../Coins";
 import TextField from "@material-ui/core/TextField";
 import UntouchableCard from './UntouchableCard'
+import * as firebase from 'firebase'
 class SeeAnnounce extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {message : ''};
   }
 
   componentDidMount() {
@@ -36,9 +37,32 @@ class SeeAnnounce extends Component {
       });
   };
 
+  sendMyApplication = () => {
+    const { annonce, apply } = this.state
+    console.log(annonce)
+    console.log(annonce[0].postulants.map(item => item.id === localStorage.getItem('userId')))
+    if (annonce[0].postulants.map(item => item.id === localStorage.getItem('userId')).includes(false)    
+   || annonce[0].postulants.map(item => item.id === localStorage.getItem('userId')).length === 0   && !apply ){
+    const { match } = this.props
+    const id = match.params.annonceid;
+    firebase.firestore().collection('annonces').doc(id).update({
+      postulants : firebase.firestore.FieldValue.arrayUnion({ id : localStorage.getItem('userId') , date : Date(Date.now()).toString()})
+    })
+    this.setState({
+      message : 'Votre candidature a bien été prise en compte.',
+      apply : true,
+    })}
+    else {
+     const date =  annonce[0].postulants.filter(annonce => annonce.id.includes(localStorage.getItem('userId')))
+     
+      this.setState({
+      message : `Vous avez déjà postulé à cette annonce le ${date[0].date} , votre candidature sera traitée dans les plus brefs délais.`
+    })}
+  }
+
   render() {
-    const { annonce } = this.state;
-    console.log(annonce);
+    const { annonce, message } = this.state;
+
     return (
       <div>
         {" "}
@@ -57,11 +81,12 @@ class SeeAnnounce extends Component {
                 value={annonce[0].description}
               />
             </div>{" "}
+            <p>{message}</p>
           </>
         ) : (
           <p> loading..</p>
         )}{" "}
-        <Button style={{marginTop: '50px'}}>Postuler</Button>
+        <Button onClick={() => {this.sendMyApplication()}} style={{marginTop: '50px'}}>Postuler</Button>
       </div>
     );
   }

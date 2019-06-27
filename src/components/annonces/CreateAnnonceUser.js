@@ -31,7 +31,8 @@ class CreateAnnonceUser extends React.Component {
       titre,
       description,
       thématique,
-      createur: localStorage.getItem("userId")
+      createur: localStorage.getItem("userId"),
+      postulants : []
     });
   };
 
