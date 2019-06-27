@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   const { history } = props
   return (
     <Grid container justify="flex-end" >
-      <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" onClick={() => {history.push('/Profile')}} className={classes.avatar} />
+      <Avatar alt="Remy Sharp" src="https://i.ibb.co/XkXd1Qk/Avatar.png" alt="Avatar" border="0" onClick={() => {history.push('/Profile')}} className={classes.avatar} />
      
     </Grid>
   );

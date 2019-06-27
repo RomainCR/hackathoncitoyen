@@ -13,32 +13,36 @@ const useStyles = makeStyles({
     
   },
   media: {
-    height: 250,
+    height: 180,
     width: 260,
-    border: '2px solid black'
+    border: '1px solid black',
+    backgroundColor: '#C0DF81',
   },
+
+  
 });
 
 export default function MediaCard(props) {
   const classes = useStyles();
   const putImage = (thématique) => {
     console.log(thématique)
-    if(thématique === "Nature et jardinage") {
-      return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-capture-da-ei-cran-2019-06-26-ai-20-07-34.png'
+    if (thématique === "Nature et jardinage") {
+      return  'https://i.ibb.co/VpJjRmK/picto00.png'
     }
     if (thématique === "Ecologie et nettoyage"){
-    return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto01.png'}
+    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+
     if (thématique === "Loisir et divertissement") {
-        return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto04.png'
+        return 'https://i.ibb.co/N97WymJ/picto04.png'
     }
     if (thématique === "Aide à la personne") {
-return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto05.png'
+return  'https://i.ibb.co/M2cQ6S3/picto05.png'
     }
     if (thématique === "Réparation et bricolage") {
-return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto02.png'
+return 'https://i.ibb.co/JvXZHR5/picto.png'
     }
     if (thématique === "Education") {
-      return 'https://cdn.discordapp.com/attachments/593438579821248535/593691635422986250/picto15.png'
+      return 'https://i.ibb.co/kJ95cSp/picto15.png'
     }
   }
   return (
@@ -49,7 +53,7 @@ return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto02.png'
         <CardMedia
           className={classes.media}
           image={putImage(props.category)}
-         
+          style={{ width: '100%' }}
         />
       </CardActionArea>
     </Card>
