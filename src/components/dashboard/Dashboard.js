@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    this.findUserProfile()
     this.getAnnounceFromDB();
     this.getThématiqueFromDB();
     const { firestore } = this.props;
@@ -40,7 +41,22 @@ class Dashboard extends React.Component {
       });
     }
   }
+  findUserProfile = () => {
+    const user = [];
+    firebase
+      .firestore()
+      .collection("usersinfo")
+      .doc(`${localStorage.getItem("userId")}`)
 
+      .get()
+      .then(doc => {
+        user.push(doc.data());
+      });
+
+    this.setState({
+      user
+    });
+  };
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
@@ -101,7 +117,7 @@ class Dashboard extends React.Component {
       thématiques,
       choice,
       userInfo,
-      showAll,
+      showAll, user
     } = this.state;
 
     return (
@@ -118,17 +134,17 @@ class Dashboard extends React.Component {
             history.push('/dashboard');
           }}/> : null}
          
-        <Avatar userInfo={userInfo} />
-        <Coins position="flex-end" userInfo={userInfo} />
+       { user && user.isAgent === false ? <> <Avatar userInfo={userInfo} />
+        <Coins position="flex-end" userInfo={userInfo} /> </> : null  }
         {!choice && (
-        <> <p>Nom de l'application </p>
+        <> <p>UniCity </p>
           <Button onClick={() => {
             this.setState({
               showAll: true,
               choice: 'all'
             })
           }}>
-            {userInfo && userInfo.isAgent ? 'Afficher toutes les profil' : 'Afficher toutes les annonces'}
+            {userInfo && userInfo.isAgent ? 'Afficher tous les profils' : 'Afficher toutes les annonces'}
           </Button>
         </>
         )
