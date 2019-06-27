@@ -46,22 +46,22 @@ const redirectToAnnounce = () => {
   const putImage = (annonce) => {
     console.log(annonce)
     if(annonce.data.thématique === "Nature et jardinage") {
-      return 'https://i.ibb.co/VpJjRmK/picto00.png'
+      return 'https://i.ibb.co/gRxQRNC/nature.png'
     }
     if (annonce.data.thématique === "Ecologie et nettoyage"){
-    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+    return 'https://i.ibb.co/q1KScvP/ecologie.png'}
 
     if (annonce.data.thématique === "Loisir et divertissement") {
-        return 'https://i.ibb.co/N97WymJ/picto04.png'
+        return 'https://i.ibb.co/p2gd20D/loisir.png'
     }
     if (annonce.data.thématique === "Aide à la personne") {
-return 'https://i.ibb.co/M2cQ6S3/picto05.png'
+return 'https://i.ibb.co/55sdLQw/aide.png'
     }
     if (annonce.data.thématique === "Réparation et bricolage") {
-return 'https://i.ibb.co/JvXZHR5/picto.png'
+return 'https://i.ibb.co/9YqWPBC/brico.png'
     }
     if (annonce.data.thématique === "Education") {
-      return 'https://i.ibb.co/kJ95cSp/picto15.png'
+      return 'https://i.ibb.co/NWmx5KC/ducation.png'
     }
   }
   

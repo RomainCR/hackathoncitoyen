@@ -97,7 +97,7 @@ class MyProfile extends Component {
                 onClick={this.logout}
                 variant="contained"
                 style={{
-                  margin: '30px 0 30px 0',
+                  marginBottom: '30px',
                   width: '300px',
                 }}
                 className="Button"

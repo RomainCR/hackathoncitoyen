@@ -8,6 +8,7 @@ import MediaCard from './MediaCard'
 import Grid from '@material-ui/core/Grid'
 import Coins from '../Coins'
 import ListAnnonce from './ListAnnonce'
+import AgentUserView from '../AgentUserView'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -38,7 +39,11 @@ class Dashboard extends React.Component {
           annonces,
         })
       });
-  };
+       this.setState({
+        annonces,
+       })
+    };
+  
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
@@ -54,8 +59,6 @@ class Dashboard extends React.Component {
       this.setState({
         thématiques,
       })
-
-
     });
   };
 
@@ -133,6 +136,11 @@ class Dashboard extends React.Component {
         }}>
 
         </div>
+        <Grid container >
+          {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
+        </Grid>
+        {console.log(choice,'dash')}
+        <AgentUserView choice={choice} />
       </div>
     );
   }
