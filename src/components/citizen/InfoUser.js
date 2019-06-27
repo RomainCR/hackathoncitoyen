@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LargeAvatar from './LargeAvatar';
+import Coins from '../Coins';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -100,7 +101,10 @@ class infoUser extends Component {
     const { userInfo } = this.props;
     const { bio, thématiquelist } = this.state;
     return (
-      <Grid container style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <Coins position="center" userInfo={userInfo} />
+        </Grid>
         <Grid item xs={12}>
           {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>
