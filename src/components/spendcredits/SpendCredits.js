@@ -65,8 +65,8 @@ class SpendCredit extends Component {
     const { items, userInfo } = this.state;
     return (
       <div>
-        <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
-        <p>Dépenser vos crédits</p>
+        <Avatar style={{ marginTop: '20%'}} />
+        <p style={{ marginTop: '15%'}} >Dépenser vos crédits</p>
         <Coins position="center" userInfo={userInfo} />
         <Grid container>
           {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}{" "}

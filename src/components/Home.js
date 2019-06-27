@@ -14,9 +14,9 @@ class Home extends Component {
   render() {
     return (
       <div className="home" style={{ color: 'black' }}>
-        <img src="./assets/logo.png" className="logo" alt="logo" />
-        <h1 style={{ margin: '1%' }}>City helper</h1>
-        <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3>
+        <img style={{ marginTop: '30%' }} src="./assets/logo.png" className="logo" alt="logo" />
+        <h1 style={{ margin: '10%' }}>City helper</h1>
+        <h3 style={{ margin: '5%' }}>Help your city, help yourself</h3>
         <Grid container>
           <Grid item xs={12}>
             <Link to="/signin" style={{ textDecoration: 'none' }}>
@@ -24,7 +24,7 @@ class Home extends Component {
                 variant="outlined"
                 style={{
                   marginTop: '10px',
-                  marginBottom: '20px',
+                  marginBottom: '10px',
                   width: '300px',
                   borderRadius:'10px'
                 }}
