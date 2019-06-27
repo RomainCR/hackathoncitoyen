@@ -13,6 +13,7 @@ import CreateAnnonce from './components/annonces/CreateAnnonce';
 import CreateAnnonceUser from './components/annonces/CreateAnnonceUser';
 import SpendCredits from './components/spendcredits/SpendCredits';
 import MyProfile from './components/citizen/MyProfile';
+import PublicProfile from './components/citizen/PublicProfil';
 import agentProfile from './components/agent/agentProfile';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
 import './App.css';
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/myprofile" component={MyProfile} />
           <Route path="/changeprofile" component={ChangeProfile} />
           <Route path="/agentprofile" component={agentProfile} />
+          <Route path="/publicprofile/:uid?" component={PublicProfile} />
           <Route path="/home" component={Home} />
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
