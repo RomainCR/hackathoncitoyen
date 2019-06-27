@@ -19,8 +19,8 @@ export default function ImgAvatar() {
 
   return (
     <Grid container justify="flex-end" >
-    <p>10 pts, add a random icon here</p>
-     
+    <p>50</p>
+    <img className="money" style={{ width: '5%', height: '5%', marginRight: '5%', marginTop: '4%', marginLeft: '1%'}} src='https://i.ibb.co/SnyPLSx/money.png' alt="money" />
     </Grid>
   );
 }

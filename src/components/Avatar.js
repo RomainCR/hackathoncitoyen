@@ -45,7 +45,7 @@ function ImgAvatar(props) {
         }
       });
     }
-  });
+  }, [userInfo.length, firestore]);
 
 
 

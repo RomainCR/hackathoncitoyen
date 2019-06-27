@@ -37,7 +37,6 @@ const App = () => (
           <Route path="/reset" component={PasswordForget} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
-          <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
         </Switch>
         {' '}

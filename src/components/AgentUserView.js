@@ -61,7 +61,8 @@ export default function AgentUserView({choice}) {
   }, []);
 
   const usersWithCompetences = users.filter(user => user.data.hasCompetences)
-  console.log(usersWithCompetences);
+  console.log(usersWithCompetences, "UWC");
+  console.log(choice);
 
   const user3 = users[3]
 
@@ -71,8 +72,13 @@ export default function AgentUserView({choice}) {
         spacing={3}
         style={{ marginBottom: "50px" }}>
         {usersWithCompetences
-          .filter(choice => usersWithCompetences.includes(choice))
-          .map(user => <Grid item xs={12} sm={6} md={4} lg={3} ><UserProfile user={user} /></Grid>)}
+          .filter(UWC => choice ? UWC.data.competences
+          .includes(choice) : UWC.data.competences)
+          .map(user => 
+            <Grid item xs={12} sm={6} md={4} lg={3} >
+              <UserProfile user={user} />
+              {console.log(user.data.competences, 'C')};
+            </Grid>)}
       </Grid>
     </div>
   );

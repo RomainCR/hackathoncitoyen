@@ -74,7 +74,6 @@ export default function UserProfile ( props ) {
           title={user && user.data.name}
           subheader={user && user.data.adress}
         />
-
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {user && user.data.competences.map(comp => <p key={user.data.uid}>{comp}</p>)}
