@@ -17,6 +17,18 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import * as firebase from 'firebase';
+import { flexbox, border } from "@material-ui/system";
+
+const picto = {
+  "Nature et jardinage": 'https://i.ibb.co/gRxQRNC/nature.png',
+  "Ecologie et nettoyage": 'https://i.ibb.co/q1KScvP/ecologie.png',
+  "Loisir et divertissement": 'https://i.ibb.co/p2gd20D/loisir.png',
+  "Aide à la personne": 'https://i.ibb.co/9YqWPBC/brico.png',
+  "Réparation et bricolage": 'https://i.ibb.co/9YqWPBC/brico.png',
+  "Education": 'https://i.ibb.co/NWmx5KC/ducation.png'
+}
+
+
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -50,13 +62,6 @@ export default function UserProfile(props) {
     setExpanded(!expanded);
   }
 
-  /*const usersWithCompetences = users.filter(user => user.data.hasCompetences)
-  console.log(users[3] && users[3].data && users[3].data.hasCompetences, 'users');
-  console.log(usersWithCompetences);
-
-  const user3 = users[3]
-  console.log(users[3] && users[3].data && users[3].data.hasCompetences, 'users');*/
-
   const { user } = props
   return (
     <div>
@@ -76,9 +81,22 @@ export default function UserProfile(props) {
           subheader={user && user.data.adress}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary">
-            {user && user.data.competences.map(comp => <p key={Math.floor(Math.random()*5000)}>{comp}</p>)}
-          </Typography>
+          <div style={{
+            display: "flex"
+          }}>
+            <Typography variant="body2" color="textSecondary">
+              {user && user.data.competences.map(comp =>
+                  <img src={picto[comp]}
+                    key={Math.floor(Math.random() * 5000)}
+                    style={{
+                      backgroundColor: "347B98",
+                      width: '20%',
+                      borderRadius: "200px",
+                      margin: "5%"
+                    }} />
+                )}
+            </Typography>
+          </div>
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="Add to favorites">
