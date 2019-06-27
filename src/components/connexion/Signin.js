@@ -14,7 +14,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 const goodCode = "1234"
 
-class Signup extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -226,4 +226,4 @@ class Signup extends Component {
   }
 }
 
-export default withRouter(withFirebaseContext(Signup));
+export default withRouter(withFirebaseContext(Signin));

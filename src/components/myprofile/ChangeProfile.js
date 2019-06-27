@@ -11,8 +11,9 @@ class ChangeProfile extends Component {
     this.state = {
       name: '',
       email: '',
-      city: '',
+      adress: '',
       bio: '',
+      competences: '',
     };
   }
 
@@ -38,7 +39,7 @@ class ChangeProfile extends Component {
   onSubmit = (event) => {
     const { firestore } = this.props;
     const {
-      name, email, city, bio,
+      name, email, adress, bio,
     } = this.state;
 
     if (name) {
@@ -51,9 +52,9 @@ class ChangeProfile extends Component {
         email,
       }, { merge: true });
     }
-    if (city) {
+    if (adress) {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
-        city,
+        adress,
       }, { merge: true });
     }
     if (bio) {
@@ -69,7 +70,7 @@ class ChangeProfile extends Component {
 
   render() {
     const {
-      name, email, city, bio,
+      name, email, adress, bio, competences
     } = this.state;
 
     return (
@@ -112,10 +113,10 @@ class ChangeProfile extends Component {
         <div>
           <TextField
             id="standard-name"
-            name="city"
+            name="Adresse postale"
             onChange={this.onChange}
-            value={city}
-            label="Ville"
+            value={adress}
+            label="adress"
             className="textfield"
             style={{ marginTop: '5%', width: '50%' }}
           />
@@ -134,7 +135,19 @@ class ChangeProfile extends Component {
             style={{ marginTop: '5%', width: '50%' }}
           />
         </div>
-
+        <div>
+          <TextField
+            id="standard-multiline-flexible"
+            name="competences"
+            onChange={this.onChange}
+            value={competences}
+            label="En dire plus sur mes compétences"
+            multiline
+            rowsMax="4"
+            className="textField"
+            style={{ marginTop: '5%', width: '50%' }}
+          />
+        </div>
         <Button
           variant="outlined"
           name="changeprofile"

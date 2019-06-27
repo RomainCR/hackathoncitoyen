@@ -39,21 +39,6 @@
       "jsx-a11y/href-no-hash": "off",
       "jsx-a11y/mouse-events-have-key-events": "off",
       "react/prop-types": "off"
-    },
-    "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    },
-    "devDependencies": {
-      "eslint-config-airbnb": "^17.1.0"
     }
   },
   "browserslist": {
@@ -67,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.1.0"
   }
 }
