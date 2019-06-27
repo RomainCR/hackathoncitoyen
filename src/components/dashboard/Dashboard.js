@@ -8,37 +8,42 @@ import MediaCard from './MediaCard'
 import Grid from '@material-ui/core/Grid'
 import Coins from '../Coins'
 import ListAnnonce from './ListAnnonce'
+import AgentUserView from '../AgentUserView'
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      annonces : [],
-  
+    this.state = {
+      annonces: [],
+
       error: null,
-  
-      thématiques : []
+
+      thématiques: []
     };
   }
- 
+
 
   getAnnounceFromDB = () => {
-  
+
     const annonces = []
     firebase
-    .firestore()
-    .collection('annonces')
-   
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.docs.forEach((doc) => {
-        annonces.push({ data: doc.data(), id: doc.id });
+      .firestore()
+      .collection('annonces')
+
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          annonces.push({ data: doc.data(), id: doc.id });
+        });
+        this.setState({
+          annonces,
+        })
       });
        this.setState({
         annonces,
        })
-    });
-  };
+    };
+  
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
@@ -49,13 +54,11 @@ class Dashboard extends React.Component {
 
       for (const [, value] of Object.entries(dbCategory)) {
         thématiques.push(`${value}`);
-      
+
       }
       this.setState({
         thématiques,
       })
-
-    
     });
   };
 
@@ -91,10 +94,10 @@ class Dashboard extends React.Component {
 
 handleChoice = (thématique) => {
 
-  this.setState({
-    choice : thématique
-  })
-}
+    this.setState({
+      choice: thématique
+    })
+  }
 
 
   render() {
@@ -102,10 +105,10 @@ handleChoice = (thématique) => {
  
     return (
       <div>
-        <button style={{ marginTop: '5%'}} onClick={() => {
+        <button style={{ marginTop: '5%' }} onClick={() => {
           this.setState({
-            choice : undefined,
-            showAll : false,
+            choice: undefined,
+            showAll: false,
           })
         }}>reset thématique</button>
       <Avatar userInfo={userInfo}/>
@@ -127,9 +130,15 @@ handleChoice = (thématique) => {
     
         <div style={{ 
           display: "flex",
-          justifyContent: "center", }}>
-         
+          justifyContent: "center",
+        }}>
+
         </div>
+        <Grid container >
+          {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
+        </Grid>
+        {console.log(choice,'dash')}
+        <AgentUserView choice={choice} />
       </div>
     );
   }
