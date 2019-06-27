@@ -105,7 +105,7 @@ class Dashboard extends React.Component {
     } = this.state;
 
     return (
-      <div>
+      <div style={{ marginBottom: '80px' }}>
        {  choice ? 
        <ArrowBack
           style={{ position: 'fixed', left: '10px', top: '10px' }}
