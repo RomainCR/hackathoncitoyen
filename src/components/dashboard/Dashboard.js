@@ -120,33 +120,28 @@ class Dashboard extends React.Component {
          
         <Avatar userInfo={userInfo} />
         <Coins position="flex-end" userInfo={userInfo} />
-        {!choice ? <> <p>Nom de l'application </p>
+        {!choice && (
+        <> <p>Nom de l'application </p>
           <Button onClick={() => {
             this.setState({
               showAll: true,
               choice: 'all'
             })
           }}>
-        
-            Afficher toutes les annonces
-          </Button> </> : null}
-
+            {userInfo && userInfo.isAgent ? 'Afficher toutes les profil' : 'Afficher toutes les annonces'}
+          </Button>
+        </>
+        )
+        }
 
         <Grid container>
           {!choice ? thématiques.map(thématique => <MediaCard category={thématique} onChoice={this.handleChoice} />) : null}
-          {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
+          {choice && userInfo && userInfo.isAgent ? (<AgentUserView choice={choice} />) : (annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />))}
         </Grid>
 
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-        }}>
-
-        </div>
         <Grid container>
           {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
         </Grid>
-        <AgentUserView choice={choice} />
       </div>
     );
   }
