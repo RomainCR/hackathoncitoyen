@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import Button from '@material-ui/core/Button';
 import ArrowBack from '@material-ui/icons/ArrowBack';
+import StarIcon from '@material-ui/icons/Star';
 import { Link } from 'react-router-dom';
-import InfoUser from './InfoUser';
 import Edit from '@material-ui/icons/Edit';
+import InfoUser from './InfoUser';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 
 class MyProfile extends Component {
@@ -67,6 +68,7 @@ class MyProfile extends Component {
 
   render() {
     const { userInfo, error } = this.state;
+    const mapArray = new Array(3).fill(3);
     return (
       <div>
         <ArrowBack
@@ -75,10 +77,13 @@ class MyProfile extends Component {
             this.redirect('/dashboard');
           }}
         />
-        <div style={{display: 'flex', justifyContent:'center', alignItems: 'center'}}>
-        <h1>Mon profil</h1>
-        <Link to={`/changeprofile`}><Edit /></Link>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <h1>Mon profil</h1>
+          <Link to="/changeprofile"><Edit /></Link>
         </div>
+        {mapArray.map(() => (
+          <StarIcon style={{ width: '40px', height: '40px' }} />
+        ))}
         {' '}
         {userInfo
           ? (
@@ -101,7 +106,7 @@ class MyProfile extends Component {
             </>
           )
           : (
-              <p>Loading your info</p>
+            <p>Loading your info</p>
           )
         }
       </div>

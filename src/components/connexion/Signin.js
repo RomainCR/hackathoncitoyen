@@ -69,7 +69,7 @@ class Signin extends Component {
           this.users(user);
         })
         .catch((error) => {
-          this.setState({ error : error.message });
+          this.setState({ error: error.message });
         });
     }
     event.preventDefault();
@@ -83,6 +83,8 @@ class Signin extends Component {
     firestore.doc(`usersinfo/${user.uid}`).set({
       name: username,
       email,
+      credits: 0,
+      hasCompetences: false,
       adress,
       isAgent,
       uid: user.uid,

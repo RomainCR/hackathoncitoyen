@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import ImageUpload from './ImageUpload';
+import LargeAvatar from './LargeAvatar';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import ImageUpload from './ImageUpload';
 
 
 class infoUser extends Component {
@@ -11,10 +12,9 @@ class infoUser extends Component {
     super(props);
     this.state = {
       bio: '',
-      competences: '',
       thématiquelist: [],
       myThematiques: [],
-    }
+    };
   }
 
   componentDidMount() {
@@ -24,9 +24,9 @@ class infoUser extends Component {
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
-    const themRef = firestore.collection("category").doc("thématique");
+    const themRef = firestore.collection('category').doc('thématique');
     const thématique = [];
-    themRef.get().then(document => {
+    themRef.get().then((document) => {
       const dbCategory = document.data();
 
       for (const [, value] of Object.entries(dbCategory)) {
@@ -34,7 +34,7 @@ class infoUser extends Component {
       }
 
       this.setState({
-        thématiquelist: thématique
+        thématiquelist: thématique,
       });
     });
   };
@@ -66,6 +66,7 @@ class infoUser extends Component {
     if (added === 'competences' && myThematiques.length > 0) {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
         competences: myThematiques,
+        hasCompetences: true,
       }, { merge: true });
       getInfo();
     }
@@ -80,15 +81,15 @@ class infoUser extends Component {
     // check if the check box is checked or unchecked
     if (e.target.checked) {
       // add the numerical value of the checkbox to options array
-      thématiques.push(e.target.value)
-      console.log(thématiques)
+      thématiques.push(e.target.value);
+      console.log(thématiques);
     } else {
       // or remove the value from the unchecked checkbox from the array
-      index = thématiques.indexOf(e.target.value)
-      thématiques.splice(index, 1)
+      index = thématiques.indexOf(e.target.value);
+      thématiques.splice(index, 1);
     }
     // update the state with the new array of options
-    this.setState({ myThematiques: thématiques })
+    this.setState({ myThematiques: thématiques });
   }
 
 
@@ -96,37 +97,37 @@ class infoUser extends Component {
     const { userInfo } = this.props;
     const { bio, thématiquelist } = this.state;
     return (
-      <Grid container>
+      <Grid container style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         <Grid item xs={12}>
-          Prénom et nom :
-                {' '}
-          {userInfo.name}
+          {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>
+        <div style={{ border: '2px solid black', borderRadius: "10px" }}>
+          <Grid item xs={12}>
+            Prénom et nom :
+            {' '}
+            {userInfo.name}
+          </Grid>
+          <Grid item xs={12}>
+            Email :
+            {' '}
+            {userInfo.email && userInfo.email}
+          </Grid>
+          <Grid item xs={12}>
+            Adresse postale :
+            {' '}
+            {userInfo.adress && userInfo.adress}
+          </Grid>
+        </div>
         <Grid item xs={12}>
-          {userInfo.url ? <img style={{ width: '70%' }} alt="Profil img" src={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
-        </Grid>
-        <Grid item xs={12}>
-          Email :
-                {' '}
-          {userInfo.email && userInfo.email}
-        </Grid>
-        <Grid item xs={12}>
-          Adresse postale :
-                {' '}
-          {userInfo.adress && userInfo.adress}
-        </Grid>
-        <Grid item xs={12}>
-
-          {' '}
           {userInfo.bio ? (
-            <>
+            <div>
               <p style={{ fontWeight: 'bold' }}>
                 Ma présentation :
-             </p>
+              </p>
               {userInfo.bio}
-            </>
-          ) :
-            (
+            </div>
+          )
+            : (
               <>
                 <p style={{ fontWeight: 'bold' }}>
                   Ajouter un texte de présentation :
@@ -168,8 +169,8 @@ class infoUser extends Component {
                 </>
               ))}
             </>
-          ) :
-            (
+          )
+            : (
               <form>
                 <p style={{ fontWeight: 'bold' }}>Indiquer mes compétences :</p>
                 {thématiquelist.length > 0 && thématiquelist.map(thématique => (
