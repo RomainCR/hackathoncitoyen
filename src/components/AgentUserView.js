@@ -75,9 +75,8 @@ export default function AgentUserView({choice}) {
           .filter(UWC => choice ? UWC.data.competences
           .includes(choice) : UWC.data.competences)
           .map(user => 
-            <Grid item xs={12} sm={6} md={4} lg={3} >
+            <Grid item xs={12} sm={6} md={4} lg={3} key={Math.floor(Math.random()*5000)}>
               <UserProfile user={user} />
-              {console.log(user.data.competences, 'C')};
             </Grid>)}
       </Grid>
     </div>
