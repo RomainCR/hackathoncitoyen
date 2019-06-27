@@ -105,13 +105,22 @@ class infoUser extends Component {
         <Grid item xs={12}>
           {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>
-        <div style={{ border: '2px solid black', borderRadius: "10px" }}>
-          <Grid item xs={12}>
+        <div style={{
+          border: '2px solid black',
+          borderRadius: "10px",
+          backgroundColor: "#e6e6e6",
+          margin: "20px",
+          padding: "20px",
+        }}>
+          <Grid item xs={12} 
+            style={{
+            marginBottom: '2px'}}>
             Prénom et nom :
             {' '}
             {userInfo.name}
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{
+            marginBottom: '2px'}}>
             Email :
             {' '}
             {userInfo.email && userInfo.email}
@@ -180,8 +189,8 @@ class infoUser extends Component {
                 {thématiquelist.length > 0 && thématiquelist.map(thématique => (
                   <>
                     <div className="input-group">
-                      <label>{thématique}</label>
-                      <input type="checkbox" value={thématique} onChange={this.handleChange} />
+                      <label style={{ fontSize: '1.2em' }}>{thématique}</label>
+                      <input style={{ transform: 'scale(1.3)' }} type="checkbox" value={thématique} onChange={this.handleChange} />
                     </div>
                   </>
                 ))}
@@ -200,7 +209,7 @@ class infoUser extends Component {
               </form>
             )}
         </Grid>
-      </Grid>
+      </Grid >
     );
   }
 }
