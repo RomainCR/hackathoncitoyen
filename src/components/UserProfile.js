@@ -75,8 +75,8 @@ export default function UserProfile ( props ) {
           subheader={user && user.data.adress}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {user && user.data.competences.map(comp => <p key={user.data.uid}>{comp}</p>)}
+          <Typography variant="body2" color="textSecondary">
+            {user && user.data.competences.map(comp => <p key={Math.floor(Math.random()*5000)}>{comp}</p>)}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

@@ -139,7 +139,6 @@ class Dashboard extends React.Component {
         <Grid container >
           {choice ? annonces.filter(annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
         </Grid>
-        {console.log(choice,'dash')}
         <AgentUserView choice={choice} />
       </div>
     );
