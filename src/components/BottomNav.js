@@ -58,7 +58,7 @@ function BottomNav(props) {
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
       <BottomNavigationAction onClick={() => {history.push('/dashboard')}} value="recents" icon={<HomeIcon />} />
       <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" icon={<BookIcon />} />
-      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/myprofile')} : () => {history.push('/agentProfile')} } label="Profile" icon={<AccountBox />} />
+      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/agentprofile')} : () => {history.push('/myProfile')} } label="Profile" icon={<AccountBox />} />
       <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/createannonce')} : () => {history.push('/createAnnonceUser')} } label="Profile" icon={<Edit />} />
     </BottomNavigation>
   );
