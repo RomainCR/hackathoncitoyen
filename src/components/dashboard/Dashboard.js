@@ -35,10 +35,9 @@ class Dashboard extends React.Component {
         annonces.push({ data: doc.data(), id: doc.id });
       });
        this.setState({
-         annonces,
+        annonces,
        })
     });
-   
   };
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
@@ -87,10 +86,9 @@ class Dashboard extends React.Component {
           userInfo,
         });
       }
-    }).catch((error) => {
-      this.setState({ error });
     });
   }
+
 handleChoice = (thématique) => {
 
   this.setState({
@@ -100,7 +98,7 @@ handleChoice = (thématique) => {
 
 
   render() {
-    const { annonces,  thématiques , choice, showAll} = this.state;
+    const { annonces, thématiques, choice, userInfo, showAll } = this.state;
  
     return (
       <div>
@@ -110,8 +108,8 @@ handleChoice = (thématique) => {
             showAll : false,
           })
         }}>reset thématique</button>
-      <Avatar/>
-      <Coins/>
+      <Avatar userInfo={userInfo}/>
+      <Coins position="flex-end" userInfo={userInfo}/>
        {!choice ?  <> <p>Nom de l'application </p>
         <Button onClick={() => {this.setState({
           showAll : true,
