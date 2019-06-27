@@ -13,6 +13,7 @@ import withFirebaseContext from '../Firebase/withFirebaseContext';
 
 const useStyles = makeStyles({
   root: {
+    marginTop:'20px',
     width: '100%',
     position: 'fixed',
     bottom: '0'
@@ -39,7 +40,6 @@ function BottomNav(props) {
     if (localStorage.getItem('userId')) {
       docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
       getInfo(docRef);
-      console.log('hello')
     } else {
       const { auth } = this.props;
       auth.onAuthStateChanged((user) => {

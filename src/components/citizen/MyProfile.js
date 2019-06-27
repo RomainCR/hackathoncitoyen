@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Edit from '@material-ui/icons/Edit';
 import InfoUser from './InfoUser';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import Coins from '../Coins';
 
 class MyProfile extends Component {
   constructor(props) {
@@ -81,6 +82,7 @@ class MyProfile extends Component {
           <h1>Mon profil</h1>
           <Link to="/changeprofile"><Edit /></Link>
         </div>
+        <Coins position="center" userInfo={userInfo} />
         {mapArray.map(() => (
           <StarIcon style={{ width: '40px', height: '40px' }} />
         ))}
@@ -95,7 +97,7 @@ class MyProfile extends Component {
                 onClick={this.logout}
                 variant="contained"
                 style={{
-                  margin: '30px 0 30px 0',
+                  marginBottom: '30px',
                   width: '300px',
                 }}
                 className="Button"

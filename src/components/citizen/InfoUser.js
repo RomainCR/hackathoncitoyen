@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LargeAvatar from './LargeAvatar';
+import Coins from '../Coins';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -44,7 +45,8 @@ class infoUser extends Component {
     firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
       url,
     }, { merge: true });
-    getInfo();
+    const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+    getInfo(docRef);
   }
 
   onChange = (event) => {
@@ -61,14 +63,16 @@ class infoUser extends Component {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
         bio,
       }, { merge: true });
-      getInfo();
+      const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      getInfo(docRef);
     }
     if (added === 'competences' && myThematiques.length > 0) {
       firestore.doc(`usersinfo/${localStorage.getItem('userId')}`).set({
         competences: myThematiques,
         hasCompetences: true,
       }, { merge: true });
-      getInfo();
+      const docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      getInfo(docRef);
     }
   }
 
@@ -97,7 +101,7 @@ class infoUser extends Component {
     const { userInfo } = this.props;
     const { bio, thématiquelist } = this.state;
     return (
-      <Grid container style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+      <Grid container justify="center">
         <Grid item xs={12}>
           {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>

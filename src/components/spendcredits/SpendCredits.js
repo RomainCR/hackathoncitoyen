@@ -2,16 +2,44 @@ import React, { Component } from "react";
 import ItemList from "./ItemList";
 import WithFirebaseContext from "../../Firebase/withFirebaseContext";
 import Grid from "@material-ui/core/Grid";
+import Coins from '../Coins';
 import Avatar from '../Avatar'
 
 class SpendCredit extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userInfo: {},
+    };
   }
 
   componentDidMount() {
     this.getItemsFromDB();
+    const { firestore } = this.props;
+    let docRef;
+    if (localStorage.getItem('userId')) {
+      docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      this.getInfo(docRef);
+    } else {
+      const { auth } = this.props;
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          docRef = firestore.doc(`usersinfo/${user.uid}`);
+          this.getInfo(docRef);
+        }
+      });
+    }
+  }
+
+  getInfo = (docRef) => {
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const userInfo = doc.data();
+        this.setState({
+          userInfo,
+        });
+      }
+    });
   }
 
   getItemsFromDB = () => {
@@ -34,12 +62,12 @@ class SpendCredit extends Component {
   
   
   render() {
-    const { items } = this.state;
+    const { items, userInfo } = this.state;
     return (
       <div>
         <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
         <p>Dépenser vos crédits</p>
-        <h1>àrécupererdeladb</h1>
+        <Coins position="center" userInfo={userInfo} />
         <Grid container>
           {items ? items.map(item => <ItemList item={item} />) : null}{" "}
         </Grid>

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
+import InfoUser from './InfoUser';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import StarIcon from '@material-ui/icons/Star';
+import Button from '@material-ui/core/Button';
 
-
-class agentProfile extends Component {
+class PublicProfil extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: null,
-      error: null,
+      userInfo: {}
     };
   }
 
@@ -37,42 +37,36 @@ class agentProfile extends Component {
           userInfo,
         });
       }
-    }).catch((error) => {
-      this.setState({ error });
-    });
-  }
-
-  logout = () => {
-    const { auth } = this.props;
-    const { history } = this.props;
-
-    auth.signOut().then(() => {
-      history.push('/signin');
-    }, (error) => {
-      console.log(error);
     });
   }
 
   render() {
-    const { userInfo, error } = this.state;
+    const { userInfo } = this.state;
+    const mapArray = new Array(3).fill(3);
     return (
-      <div>
-        <Button
-          size="large"
-          type="button"
-          onClick={this.logout}
-          variant="contained"
-          style={{
-            margin: '30px 0 30px 0',
-            width: '300px',
-          }}
-          className="Button"
-        >
-          Log Out
-        </Button>
-      </div>
+      <>
+        <h1>Profil de
+          {' '}
+          {userInfo && userInfo.name}
+        </h1>
+        {mapArray.map(() => (
+          <StarIcon style={{ width: '40px', height: '40px' }} />
+        ))}
+        <InfoUser userInfo={userInfo} />
+        <a href={`mailto:${userInfo && userInfo.email}`}>
+          <Button
+            size="large"
+            type="button"
+            variant="contained"
+            style={{ marginTop: '2%' }}
+            className="Button"
+          >
+            Contacter
+          </Button>
+        </a>
+      </>
     );
   }
 }
 
-export default withFirebaseContext(agentProfile);
+export default withFirebaseContext(PublicProfil);
