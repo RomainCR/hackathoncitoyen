@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as firebase from "firebase";
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
 class ApplyList extends Component {
   constructor(props) {
     super(props);
@@ -46,12 +48,11 @@ class ApplyList extends Component {
         );}
     }
     this.setState({match})
-
-    
   }
 
   render() {   const { match } = this.state    
-    return <div> <p>{match ? match.map(user => <p>{user[0].name} </p>) : <p> loading...</p>}</p></div>;
+  console.log(match)
+    return <div><div> <h1>Postulants</h1> </div><p>{match.length > 0? match[0].map(user => <p>  <Link to={`/publicprofile/${user.uid}`}> {user.name} </Link><Button>Engager</Button></p>): null}  </p></div>;
   }
 }
 

@@ -9,6 +9,8 @@ import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import Coins from '../Coins';
 import ListAnnonce from './ListAnnonce';
 import AgentUserView from '../AgentUserView';
+import { withRouter } from 'react-router-dom'
+import ArrowBack from '@material-ui/icons/ArrowBack'
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -104,16 +106,18 @@ class Dashboard extends React.Component {
 
     return (
       <div>
-        <button
-        style={{ marginTop: '5%' }}
-        onClick={() => {
-          this.setState({
-            choice: undefined,
-            showAll: false,
-          })
-        }}>
-          reset thématique
-        </button>
+       {  choice ? 
+       <ArrowBack
+          style={{ position: 'fixed', left: '10px', top: '10px' }}
+          onClick={() => {
+            const { history } = this.props
+            this.setState({
+              showAll:false,
+              choice: undefined
+            })
+            history.push('/dashboard');
+          }}/> : null}
+         
         <Avatar userInfo={userInfo} />
         <Coins position="flex-end" userInfo={userInfo} />
         {!choice ? <> <p>Nom de l'application </p>
@@ -123,6 +127,7 @@ class Dashboard extends React.Component {
               choice: 'all'
             })
           }}>
+        
             Afficher toutes les annonces
           </Button> </> : null}
 
@@ -147,4 +152,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default withFirebaseContext(Dashboard);
+export default withFirebaseContext(withRouter(Dashboard));

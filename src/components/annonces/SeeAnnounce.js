@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import UntouchableCard from "./UntouchableCard";
 import * as firebase from "firebase";
 import ApplyList from "../apply/applyList";
-
+import ArrowBack from '@material-ui/icons/ArrowBack'
 class SeeAnnounce extends Component {
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ class SeeAnnounce extends Component {
       .collection("usersinfo").doc(`${localStorage.getItem("userId")}`)
 
       .get()
-      .then( doc => { user.push(doc.data()) });
+      .then( doc => {   user.push(doc.data()) });
     
     this.setState({
       user
@@ -99,17 +99,27 @@ class SeeAnnounce extends Component {
 
   render() {
     const { annonce, message, id, user } = this.state;
-    console.log(this.state.user);
+  
     return (
       <div>
         {" "}
-        <Avatar /> <Coins />
+        <ArrowBack
+          style={{ position: 'fixed', left: '10px', top: '10px' }}
+          onClick={() => {
+            const { history } = this.props
+            this.setState({
+              showAll:false,
+              choice: undefined
+            })
+            history.push('/dashboard');
+          }}/>
+        
         {annonce ? (
           <>
             {" "}
             <p style={{ marginTop: "20px" }}>{annonce[0].titre}</p>{" "}
             <UntouchableCard />
-            <p style={{ marginTop: "20px" }}>{annonce[0].points}</p>{" "}
+            <p style={{ marginTop: "20px" }}>{annonce[0].points} <img className="money" style={{ width: '5%', height: '5%', marginRight: '5%', marginTop: '4%', marginLeft: '1%'}} src='https://i.ibb.co/SnyPLSx/money.png' alt="money" />  </p> {" "}
             <div style={{ marginTop: "50px" }}>
               {" "}
               <TextField
@@ -126,7 +136,7 @@ class SeeAnnounce extends Component {
           <p> loading..</p>
         )}{" "}
         {annonce ? (
-          user.isAgent === false ? (
+          user[0].isAgent === false ? (
             <Button
               onClick={() => {
                 this.sendMyApplication();
