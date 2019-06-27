@@ -8,13 +8,11 @@ import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles({
   card: {
     maxWidth: '15%',
-
     display: "inline",
 
   },
   media: {
     height: 140,
-   
   },
 });
 
@@ -22,14 +20,13 @@ export default function MediaCard(props) {
   const classes = useStyles();
 console.log(props)
   return (
-    <Grid item xs={6} style={{ border: '2px solid black'}}>
+    <Grid item xs={6} style={{ border: '1px solid black'}}>
     <Card className={classes.card}>
 
       <CardActionArea >
         <CardMedia
           className={classes.media}
           image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"
-         
         />
         <p>{props.item.prix}</p>
       </CardActionArea>
