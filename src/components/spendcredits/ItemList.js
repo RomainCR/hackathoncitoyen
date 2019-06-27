@@ -9,10 +9,12 @@ const useStyles = makeStyles({
   card: {
     maxWidth: '15%',
     display: "inline",
+    
 
   },
   media: {
     height: 140,
+    backgroundColor: '#347B98',
   },
 });
 
@@ -23,13 +25,14 @@ console.log(props)
     <Grid item xs={6} style={{ border: '1px solid black'}}>
     <Card className={classes.card}>
 
-      <CardActionArea >
+      <CardActionArea style={{ backgroundColor: '#347B98' }} >
         <CardMedia
           className={classes.media}
           image= { props.item.image}
          
         />
-        <p>{props.item.prix}</p>
+        <p style={{ fontSize: '12px'}}>{props.item.nom}</p>
+        <p style={{ fontSize: '15px'}}>{props.item.prix}</p>
       </CardActionArea>
     </Card>
     </Grid>
