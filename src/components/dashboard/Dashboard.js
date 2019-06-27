@@ -34,10 +34,9 @@ class Dashboard extends React.Component {
         annonces.push({ data: doc.data(), id: doc.id });
       });
        this.setState({
-         annonces,
+        annonces,
        })
     });
-   
   };
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
@@ -53,7 +52,7 @@ class Dashboard extends React.Component {
       }
 
       this.setState({
-       thématiques,
+        thématiques,
       });
     });
   };
