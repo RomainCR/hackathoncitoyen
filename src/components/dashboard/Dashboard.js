@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    this.findUserProfile()
     this.getAnnounceFromDB();
     this.getThématiqueFromDB();
     const { firestore } = this.props;
@@ -40,7 +41,22 @@ class Dashboard extends React.Component {
       });
     }
   }
+  findUserProfile = () => {
+    const user = [];
+    firebase
+      .firestore()
+      .collection("usersinfo")
+      .doc(`${localStorage.getItem("userId")}`)
 
+      .get()
+      .then(doc => {
+        user.push(doc.data());
+      });
+
+    this.setState({
+      user
+    });
+  };
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
 
@@ -101,7 +117,7 @@ class Dashboard extends React.Component {
       thématiques,
       choice,
       userInfo,
-      showAll,
+      showAll, user
     } = this.state;
 
     return (
@@ -118,11 +134,14 @@ class Dashboard extends React.Component {
             history.push('/dashboard');
           }}/> : null}
          
-        <Avatar userInfo={userInfo} />
-        <Coins position="flex-end" userInfo={userInfo} />
+       { user && user.isAgent === false ? <> <Avatar userInfo={userInfo} />
+        <Coins position="flex-end" userInfo={userInfo} /> </> : null  }
         {!choice && (
-        <> <p>Nom de l'application </p>
-          <Button onClick={() => {
+        <> <h3>UniCity </h3>
+        <div style={{width: '65px', height : '65px', marginLeft: 'auto', marginRight: 'auto'}}> 
+        <img style={{width: '100%', height: '100%'}} src='https://media.discordapp.net/attachments/593438579821248535/593529192453373962/logo.png?width=465&height=468'/>
+     </div>
+        <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3> <Button onClick={() => {
             this.setState({
               showAll: true,
               choice: 'all'
