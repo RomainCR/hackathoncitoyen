@@ -13,7 +13,6 @@ import CreateAnnonce from './components/annonces/CreateAnnonce';
 import CreateAnnonceUser from './components/annonces/CreateAnnonceUser';
 import SpendCredits from './components/spendcredits/SpendCredits';
 import MyProfile from './components/myprofile/MyProfile';
-import agentProfile from './components/agent/agentProfile';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
 import './App.css';
 
@@ -29,14 +28,11 @@ const App = () => (
           <Route path="/signin" component={Signin} />
           <Route path="/myprofile" component={MyProfile} />
           <Route path="/changeprofile" component={ChangeProfile} />
+          <Route path="/home" component={Home} />
           <Route path="/agentprofile" component={agentProfile} />
-          <Route path="/home" component={Home} />
-          <Route path="/home" component={Home} />
           <Route path="/connect" component={Connect} />
-          <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
-          <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
         </Switch>
