@@ -8,6 +8,8 @@ import MediaCard from './MediaCard'
 import Grid from '@material-ui/core/Grid'
 import Coins from '../Coins'
 import ListAnnonce from './ListAnnonce'
+import AgentUserView from '../AgentUserView'
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -128,6 +130,7 @@ handleChoice = (thématique) => {
           justifyContent: "center", }}>
          
         </div>
+        <AgentUserView />
       </div>
     );
   }

@@ -2,6 +2,9 @@ import React from "react";
 import withFirebaseContext from "../Firebase/withFirebaseContext";
 import TwitterTimeline from "./TwitterTimeline";
 import { flexbox } from "@material-ui/system";
+import Grid from '@material-ui/core/Grid'
+import * as firebase from 'firebase';
+
 
 class AgentView extends React.Component {
   constructor(props) {
@@ -12,67 +15,30 @@ class AgentView extends React.Component {
       error: null,
     };
   }
-  componentDidMount() { }
 
-  /*getUsersFromDB = () => {
-    const { firestore } = this.props;
-    firestore
-      .collection("usersinfo")
-      .doc()
-      .get()
-      .then(document => {
-        const users = document.data();
-
-        for (const [, value] of Object.entries(users)) {
-          users.push(value);
-        }
-      });
-  };*/
   getUsersFromDB = () => {
-    const { users } = this.state
-    const { firebase } = this.props;
+
+    const users = []
     firebase
       .firestore()
       .collection('usersinfo').where('isAgent', '==', false)
+
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
           users.push({ data: doc.data(), id: doc.id });
         });
-        console.log(users);
+        this.setState({
+          users,
+        })
       });
+
+  };
+
+  componentDidMount() {
+    this.getUsersFromDB()
+    console.log(this.state.users, 'hello');
   }
-
-
-  /* componentDidMount() {
-     const { firestore } = this.props;
-     let docRef;
-     if (localStorage.getItem('userId')) {
-       docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
-       this.getInfo(docRef);
-     } else {
-       const { auth } = this.props;
-       auth.onAuthStateChanged((user) => {
-         if (user) {
-           docRef = firestore.doc(`usersinfo/${user.uid}`);
-           this.getInfo(docRef);
-         }
-       });
-     }
-   }
- 
-   getInfo = (docRef) => {
-     docRef.get().then((doc) => {
-       if (doc.exists) {
-         const userInfo = doc.data();
-         this.setState({
-           userInfo,
-         });
-       }
-     }).catch((error) => {
-       this.setState({ error });
-     });
-   }*/
 
   render() {
 
@@ -80,13 +46,16 @@ class AgentView extends React.Component {
     console.log(users);
     return (
       <div>
-        <h1>Hello {users.name} </h1>
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-        }}>
-          <TwitterTimeline />
-        </div>
+
+        <h1>Listes des users disponibles</h1>
+        <Grid container direction="row"
+          spacing={3}
+          style={{ marginBottom: "50px" }}>
+          {users.map(user =>
+            <Grid item xs={12} sm={6} md={4} lg={3} style={{ border: "solid 2px" }}><h4>{user.data.name}</h4>
+              <p>{user.data.adress}</p> </Grid>
+          )}
+        </Grid>
       </div>
     );
   }
