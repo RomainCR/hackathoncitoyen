@@ -38,11 +38,10 @@ class SeeAnnounce extends Component {
 
   render() {
     const { annonce } = this.state;
-    console.log(annonce);
     return (
       <div>
         {" "}
-        <Avatar /> <Coins />
+        <Avatar /> <Coins position="flex-end"/>
         {annonce ? (
           <>
             {" "}
