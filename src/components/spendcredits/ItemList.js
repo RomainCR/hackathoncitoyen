@@ -26,7 +26,7 @@ console.log(props)
       <CardActionArea >
         <CardMedia
           className={classes.media}
-          image="https://i.ibb.co/VpJjRmK/picto00.png"
+          image= { props.item.image}
          
         />
         <p>{props.item.prix}</p>
