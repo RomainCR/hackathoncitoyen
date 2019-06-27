@@ -37,15 +37,9 @@ class SpendCredit extends Component {
     const { items } = this.state;
     return (
       <div>
-<<<<<<< HEAD
-        <Avatar></Avatar>
-        <h1>Utiliser vos crédits</h1>
-        <h1>Votre credit est de</h1>
-=======
         <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
         <p>Dépenser vos crédits</p>
         <h1>àrécupererdeladb</h1>
->>>>>>> dev
         <Grid container>
           {items ? items.map(item => <ItemList item={item} />) : null}{" "}
         </Grid>

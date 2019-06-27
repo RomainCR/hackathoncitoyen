@@ -68,7 +68,7 @@ return 'https://i.ibb.co/JvXZHR5/picto.png'
   return (
     <Container className={classes.root}>
       <Paper className={classes.paper}>
-        <Grid container spacing={2} justify="center" alignItems="center">
+        <Grid container spacing={2} justify="center" alignItems="center" onClick={redirectToAnnounce}>
           <Grid item>
             <ButtonBase className={classes.image}>
               <img className={classes.img} alt="complex" src="https://cdn-s-www.estrepublicain.fr/images/2FEBE9B7-9548-4DAE-B497-F98F1ED73A43/LER_22/les-travaux-devraient-se-poursuivre-jusqu-a-la-fin-de-la-semaine-photo-er-patricia-louis-1554224789.jpg" />

@@ -26,12 +26,8 @@ console.log(props)
       <CardActionArea >
         <CardMedia
           className={classes.media}
-<<<<<<< HEAD
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"
-=======
           image="https://i.ibb.co/VpJjRmK/picto00.png"
          
->>>>>>> dev
         />
         <p>{props.item.prix}</p>
       </CardActionArea>
