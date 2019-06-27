@@ -7,6 +7,8 @@ import Coins from "../Coins";
 import TextField from "@material-ui/core/TextField";
 import UntouchableCard from './UntouchableCard'
 import * as firebase from 'firebase'
+import ApplyList from '../apply/applyList'
+
 class SeeAnnounce extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +34,8 @@ class SeeAnnounce extends Component {
         annonce.push(doc);
 
         this.setState({
-          annonce
+          annonce,
+          id,
         });
       });
   };
@@ -61,7 +64,7 @@ class SeeAnnounce extends Component {
   }
 
   render() {
-    const { annonce, message } = this.state;
+    const { annonce, message, id } = this.state;
 
     return (
       <div>
@@ -82,6 +85,7 @@ class SeeAnnounce extends Component {
               />
             </div>{" "}
             <p>{message}</p>
+            <ApplyList id={id} annonce={annonce} />
           </>
         ) : (
           <p> loading..</p>

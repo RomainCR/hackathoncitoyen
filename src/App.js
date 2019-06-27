@@ -12,6 +12,7 @@ import BottomNav from "./components/BottomNav";
 import SpendCredits from "./components/spendcredits/SpendCredits";
 import Profile from "./components/myprofile/Profile";
 import SeeAnnounce from './components/annonces/SeeAnnounce'
+import applyList from './components/apply/applyList'
 import "./App.css";
 
 const App = () => (
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/connect" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
           <Route path="/profile/" component={Profile} />
+          <Route path="/applyList" component={applyList} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
         </Switch>{" "}
         <BottomNav />
