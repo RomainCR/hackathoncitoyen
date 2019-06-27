@@ -24,7 +24,7 @@ class Home extends Component {
                 variant="outlined"
                 style={{
                   marginTop: '10px',
-                  marginBottom: '20px',
+                  marginBottom: '10px',
                   width: '300px',
                   borderRadius:'10px'
                 }}
