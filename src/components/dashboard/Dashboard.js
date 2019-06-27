@@ -51,12 +51,14 @@ class Dashboard extends React.Component {
         thématiques.push(`${value}`);
       
       }
-
       this.setState({
-       thématiques,
-      });
+        thématiques,
+      })
+
+    
     });
   };
+
   componentDidMount() {
     this.getAnnounceFromDB()
     this.getThématiqueFromDB()
@@ -95,6 +97,7 @@ handleChoice = (thématique) => {
   })
 }
 
+
   render() {
     const { annonces,  thématiques , choice, showAll} = this.state;
  
@@ -118,7 +121,7 @@ handleChoice = (thématique) => {
         <Grid container > 
       {!choice ?    thématiques.map(thématique =>  <MediaCard category={thématique} onChoice={this.handleChoice}/>  ) : null}
        
-        {  console.log(annonces)}
+     
         
         {choice ? annonces.filter( annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce}/>) :  null}
        </Grid>

@@ -11,13 +11,34 @@ const ListAnnonce = props => {
     const { history } = props
     history.push(`annonce/${props.annonce.id}`)
   }
-  console.log(props)
+
+  const putImage = (annonce) => {
+    console.log(annonce)
+    if(annonce.data.thématique === "Nature et jardinage") {
+      return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-capture-da-ei-cran-2019-06-26-ai-20-07-34.png'
+    }
+    if (annonce.data.thématique === "Ecologie et nettoyage"){
+    return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto01.png'}
+    if (annonce.data.thématique === "Loisir et divertissement") {
+        return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto04.png'
+    }
+    if (annonce.data.thématique === "Aide à la personne") {
+return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto05.png'
+    }
+    if (annonce.data.thématique === "Réparation et bricolage") {
+return 'https://image.noelshack.com/fichiers/2019/26/4/1561616382-picto02.png'
+    }
+    if (annonce.data.thématique === "Education") {
+      return 'https://cdn.discordapp.com/attachments/593438579821248535/593691635422986250/picto15.png'
+    }
+  }
+  
   return (
     <>
       <Grid item xs={6}>
       <Card> 
-        <CardActionArea onClick={() => {redirectToAnnounce()}}>  <CardMedia style={{ height: "160px", width: '180px' }}
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"/> 
+        <CardActionArea onClick={() => {redirectToAnnounce()}}>  <CardMedia style={{ height: "250px", width: '250px' }}
+          image={putImage(props.annonce)}/> 
        </CardActionArea></Card>
       </Grid>{" "}
       <Grid item xs={6}>
