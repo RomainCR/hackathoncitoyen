@@ -49,7 +49,7 @@ function BottomNav(props) {
         }
       });
     }
-  });
+  }, [userInfo.length, firestore]);
 
   function handleChange(event, newValue) {
     setValue(newValue);
