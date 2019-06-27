@@ -70,7 +70,7 @@ class ChangeProfile extends Component {
 
   render() {
     const {
-      name, email, adress, bio, competences
+      name, email, adress, bio,
     } = this.state;
 
     return (
@@ -78,7 +78,7 @@ class ChangeProfile extends Component {
         <ArrowBack
           style={{ position: 'fixed', left: '10px', top: '10px' }}
           onClick={() => {
-            this.redirect('/profile');
+            this.redirect('/myprofile');
           }}
         />
         <h1>Modifier mes informations personnelles</h1>
@@ -91,7 +91,7 @@ class ChangeProfile extends Component {
             name="name"
             onChange={this.onChange}
             value={name}
-            label="Full Name"
+            label="Nom et prénom"
             className="textfield"
             style={{ marginTop: '5%', width: '50%' }}
           />
@@ -116,7 +116,7 @@ class ChangeProfile extends Component {
             name="Adresse postale"
             onChange={this.onChange}
             value={adress}
-            label="adress"
+            label="Adresse postale"
             className="textfield"
             style={{ marginTop: '5%', width: '50%' }}
           />
@@ -129,19 +129,6 @@ class ChangeProfile extends Component {
             onChange={this.onChange}
             value={bio}
             label="A propos de moi"
-            multiline
-            rowsMax="4"
-            className="textField"
-            style={{ marginTop: '5%', width: '50%' }}
-          />
-        </div>
-        <div>
-          <TextField
-            id="standard-multiline-flexible"
-            name="competences"
-            onChange={this.onChange}
-            value={competences}
-            label="En dire plus sur mes compétences"
             multiline
             rowsMax="4"
             className="textField"
