@@ -40,7 +40,7 @@ class SpendCredit extends Component {
         <Avatar style={{ marginTop: '15%', marginTop: '20%' }} />
         <p>Dépenser vos crédits</p>
         <h1> 50
-    <img className="money" style={{ width: '5%', height: '5%', marginRight: '5%', marginTop: '4%', marginLeft: '1%'}} src='https://i.ibb.co/SnyPLSx/money.png' alt="money" /></h1>
+        <img className="money" style={{ width: '5%', height: '5%', marginRight: '5%', marginTop: '4%', marginLeft: '1%'}} src='https://i.ibb.co/SnyPLSx/money.png' alt="money" /></h1>
         <Grid container>
           {items ? items.map(item => <ItemList item={item} />) : null}{" "}
         </Grid>

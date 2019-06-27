@@ -13,6 +13,7 @@ import withFirebaseContext from '../Firebase/withFirebaseContext';
 
 const useStyles = makeStyles({
   root: {
+    marginTop:'20px',
     width: '100%',
     position: 'fixed',
     bottom: '0'
