@@ -1,6 +1,7 @@
 import React from "react";
 import withFirebaseContext from "../Firebase/withFirebaseContext";
 import TwitterTimeline from "./TwitterTimeline";
+import AgentView from "./AgentView";
 import { flexbox } from "@material-ui/system";
 
 class Dashboard extends React.Component {
