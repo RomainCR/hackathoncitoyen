@@ -22,13 +22,13 @@ export default function MediaCard(props) {
   const classes = useStyles();
 console.log(props)
   return (
-    <Grid item xs={6} style={{ border: '2px solid black'}}>
+    <Grid item xs={6} style={{ border: '1px solid black'}}>
     <Card className={classes.card}>
 
       <CardActionArea >
         <CardMedia
           className={classes.media}
-          image="https://image.but.fr/is/image/but/ambiance-cuisine-osalite-1920x770?$cui_1920x770$"
+          image="https://i.ibb.co/VpJjRmK/picto00.png"
          
         />
         <p>{props.item.prix}</p>
