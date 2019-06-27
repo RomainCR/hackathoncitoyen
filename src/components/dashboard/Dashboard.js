@@ -8,6 +8,7 @@ import MediaCard from './MediaCard'
 import Grid from '@material-ui/core/Grid'
 import Coins from '../Coins'
 import ListAnnonce from './ListAnnonce'
+
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
@@ -34,10 +35,9 @@ class Dashboard extends React.Component {
         annonces.push({ data: doc.data(), id: doc.id });
       });
        this.setState({
-         annonces,
+        annonces,
        })
     });
-   
   };
   getThématiqueFromDB = () => {
     const { firestore } = this.props;
@@ -103,7 +103,7 @@ handleChoice = (thématique) => {
  
     return (
       <div>
-        <button onClick={() => {
+        <button style={{ marginTop: '5%'}} onClick={() => {
           this.setState({
             choice : undefined,
             showAll : false,

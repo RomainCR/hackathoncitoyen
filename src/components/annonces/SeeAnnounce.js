@@ -85,12 +85,12 @@ class SeeAnnounce extends Component {
               />
             </div>{" "}
             <p>{message}</p>
-            <ApplyList id={id} annonce={annonce} />
+          
           </>
         ) : (
           <p> loading..</p>
         )}{" "}
-        <Button onClick={() => {this.sendMyApplication()}} style={{marginTop: '50px'}}>Postuler</Button>
+        <Button onClick={() => {this.sendMyApplication()}} style={{marginTop: '50px'}}>Postuler</Button>  <ApplyList id={id} annonce={annonce} />
       </div>
     );
   }

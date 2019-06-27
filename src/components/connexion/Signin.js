@@ -14,7 +14,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 
 const goodCode = "1234"
 
-class Signup extends Component {
+class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -69,7 +69,7 @@ class Signup extends Component {
           this.users(user);
         })
         .catch((error) => {
-          this.setState({ error : error.message });
+          this.setState({ error: error.message });
         });
     }
     event.preventDefault();
@@ -83,6 +83,8 @@ class Signup extends Component {
     firestore.doc(`usersinfo/${user.uid}`).set({
       name: username,
       email,
+      credits: 0,
+      hasCompetences: false,
       adress,
       isAgent,
       uid: user.uid,
@@ -189,21 +191,23 @@ class Signup extends Component {
                 </RadioGroup>
               </FormControl>
             </Grid>
-            {isAgent &&
-              <Grid item xs={12}>
-                <p>Code fourni par votre administration</p>
-                <TextField
-                  required
-                  id="code"
-                  label="Indiquer le code"
-                  name="code"
-                  className='textfield'
-                  value={code}
-                  type="password"
-                  onChange={this.onChange}
-                  style={{ marginTop: '5%', width: '50%' }}
-                />
-              </Grid>
+            {isAgent
+              && (
+                <Grid item xs={12}>
+                  <p>Code fourni par votre administration</p>
+                  <TextField
+                    required
+                    id="code"
+                    label="Indiquer le code"
+                    name="code"
+                    className='textfield'
+                    value={code}
+                    type="password"
+                    onChange={this.onChange}
+                    style={{ marginTop: '5%', width: '50%' }}
+                  />
+                </Grid>
+              )
             }
             <Grid item xs={12}>
               <Button
@@ -226,4 +230,4 @@ class Signup extends Component {
   }
 }
 
-export default withRouter(withFirebaseContext(Signup));
+export default withRouter(withFirebaseContext(Signin));

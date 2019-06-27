@@ -40,7 +40,7 @@ class ApplyList extends Component {
     if (annonce[0].postulants.length > 0) {
       for (let i = 0; i < annonce[0].postulants.length; i++){
       let value =  users.filter(user => user.uid.includes(annonce[0].postulants[i].id))
-      console.log(value, annonce, annonce[0].postulants)
+   
         match.push(
           value
         );}
@@ -49,7 +49,7 @@ class ApplyList extends Component {
   }
 
   render() {   const { match } = this.state    
-    return <div> <p> </p></div>;
+    return <div> <p>{match ? match.map(user => <p>{user[0].name} </p>) : <p> loading...</p>}</p></div>;
   }
 }
 
