@@ -61,7 +61,7 @@ class SeeAnnounce extends Component {
         ) : (
           <p> loading..</p>
         )}{" "}
-        <Button>Postuler</Button>
+        <Button style={{marginTop: '50px'}}>Postuler</Button>
       </div>
     );
   }
