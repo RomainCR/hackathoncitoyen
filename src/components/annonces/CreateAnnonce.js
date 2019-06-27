@@ -100,7 +100,7 @@ class CreateAnnonce extends React.Component {
 
       for (const [, value] of Object.entries(dbCategory)) {
         thématique.push(`${value}`);
-        console.log(value)
+      
       }
 
       this.setState({
@@ -170,7 +170,7 @@ class CreateAnnonce extends React.Component {
         </div>
         <div>
           <SelectField
-            name={thématique}
+            name={'thématique'}
             choices={thématiquelist}
             handleChange={this.handleChange}
             value={thématique}
