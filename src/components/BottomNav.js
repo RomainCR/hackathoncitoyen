@@ -40,7 +40,7 @@ function BottomNav(props) {
       docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
       getInfo(docRef);
     } else {
-      const { auth } = this.props;
+      const { auth } = props;
       auth.onAuthStateChanged((user) => {
         if (user) {
           docRef = firestore.doc(`usersinfo/${user.uid}`);
@@ -48,7 +48,7 @@ function BottomNav(props) {
         }
       });
     }
-  }, [userInfo.length, firestore]);
+  }, [userInfo.length, firestore, props]);
 
   function handleChange(event, newValue) {
     setValue(newValue);
@@ -56,7 +56,7 @@ function BottomNav(props) {
   return (
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
       <BottomNavigationAction onClick={() => {history.push('/dashboard')}} value="recents" label="Dashboard" icon={<HomeIcon />} />
-      <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" label="Récompenses" icon={<BookIcon />} />
+      {userInfo && userInfo.isAgent ? null : <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" label="Récompenses" icon={<BookIcon />} />}
       <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/agentprofile')} : () => {history.push('/myProfile')} } label="Profil" icon={<AccountBox />} />
       <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/createannonce')} : () => {history.push('/createAnnonceUser')} } label="Annonces" icon={<Edit />} />
     </BottomNavigation>
