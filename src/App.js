@@ -18,6 +18,8 @@ import agentProfile from './components/agent/agentProfile';
 import Signalements from './components/agent/Signalements';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
 import applyList from './components/apply/applyList';
+import QrCode from './components/spendcredits/QrCode'
+import SendCredits from './components/spendcredits/SendCredits'
 
 import './App.css';
 
@@ -40,11 +42,12 @@ const App = () => (
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
-  
+          <Route path="/qrcode" component={QrCode} />
           <Route path="/applyList" component={applyList} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
+          <Route path="/SendCredits/:montant" component={SendCredits} />
         </Switch>
         {' '}
         <BottomNav />
