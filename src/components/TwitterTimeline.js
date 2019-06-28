@@ -6,7 +6,7 @@ const TwitterTimeline = () => (
   <div className="container-fluid">
     <TwitterTimelineEmbed
       sourceType="hashtag"
-      screenName="lyon"
+      screenName="UniCityMy"
       theme="dark"
       options={{
         height: 600,
@@ -14,7 +14,7 @@ const TwitterTimeline = () => (
       }}
     />
     <TwitterHashtagButton
-      tag={'lyon'}
+      tag={'#UniCity'}
     />
   </div>
 );
