@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   const classes = useStyles();
 const redirect = ()=> {
 const { history } = props
-history.push({pathname : '/qrcode', state: { value: props.item }})
+history.push({pathname : '/qrcode', state: { value: props.item, id : props.user.uid }})
 
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import FirebaseProvider from './Firebase/FirebaseProvider';
+import MyAnnonces from './components/citizen/MyAnnonces';
 import Dashboard from './components/dashboard/Dashboard';
 import ChangeProfile from './components/citizen/ChangeProfile';
 import Welcome from './components/connexion/Welcome';
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/signin" component={Signin} />
           <Route path="/myprofile" component={MyProfile} />
+          <Route path="/myannonces" component={MyAnnonces} />
           <Route path="/changeprofile" component={ChangeProfile} />
           <Route path="/agentprofile" component={agentProfile} />
           <Route path="/publicprofile/:uid?" component={PublicProfile} />
@@ -47,7 +49,7 @@ const App = () => (
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
-          <Route path="/SendCredits/:montant" component={SendCredits} />
+          <Route path="/SendCredits/:montant/:id?" component={SendCredits} />
         </Switch>
         {' '}
         <BottomNav />
