@@ -48,7 +48,7 @@ function BottomNav(props) {
         }
       });
     }
-  }, [userInfo.length, firestore]);
+  }, [userInfo.length, firestore, props]);
 
   function handleChange(event, newValue) {
     setValue(newValue);

@@ -1,9 +1,9 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ImageAnonceUpload from './ImageAnnonceUpoad';
-import SelectField from './SelectFields'
 import { withRouter } from 'react-router';
+import ImageAnonceUpload from './ImageAnnonceUpoad';
+import SelectField from './SelectFields';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 
 class CreateAnnonce extends React.Component {
@@ -13,13 +13,12 @@ class CreateAnnonce extends React.Component {
       errorMessage: '',
       titre: '',
       description: '',
-      thematique: [],
+      thematique: '',
       points: '',
       thematiquelist: [],
       url: '',
     };
   }
-
 
   componentDidMount() {
     this.getthematiqueFromDB();
@@ -40,6 +39,10 @@ class CreateAnnonce extends React.Component {
       this.setState({ [name]: event.target.value });
     }
   };
+
+  handleThematiqueChange = () => (event) => {
+    this.setState({ thematique: event.target.value });
+  }
 
   getImage = (url) => {
     this.setState({ url });
@@ -127,40 +130,41 @@ class CreateAnnonce extends React.Component {
     return (
       <div>
         <h1>Créer une annonce</h1>
+        <ImageAnonceUpload getImage={this.getImage} />
+        <TextField
+          required
+          id="outlined-required"
+          label="Titre"
+          defaultValue="Titre"
+          margin="normal"
+          variant="outlined"
+          value={titre}
+          onChange={this.handleChange('titre')}
+        />
         <div>
-          <ImageAnonceUpload getImage={this.getImage} />
           <TextField
             required
-            id="filled-multiline-flexible"
-            label="titre"
-            value={titre}
-            rows="1"
-            onChange={this.handleChange('titre')}
-            className="textField"
-          />
-        </div>
-        <div>
-          <TextField
-            required
-            id="filled-multiline-flexible"
+            id="outlined-multiline-static"
             label="Description"
             value={description}
             multiline
-            rows="2"
+            rows="5"
+            defaultValue="Description"
+            margin="normal"
+            variant="outlined"
             onChange={this.handleChange('description')}
-            className="textField"
-            style={{ marginTop: '2%', marginBottom: '5%', width: '30%' }}
           />
         </div>
         <div>
           <TextField
             required
+            id="outlined-required"
             label="Points"
+            defaultValue="Hello World"
+            margin="normal"
+            variant="outlined"
             value={points}
-            rows="1"
-            id="formatted-numberformat-input"
             onChange={this.handleChange('points')}
-            className="textField"
           />
         </div>
         <div>
@@ -170,9 +174,9 @@ class CreateAnnonce extends React.Component {
         </div>
         <div>
           <SelectField
-            name={'thematique'}
+            name="Thématique"
             choices={thematiquelist}
-            handleChange={this.handleChange}
+            handleChange={this.handleThematiqueChange}
             value={thematique}
           />
         </div>
