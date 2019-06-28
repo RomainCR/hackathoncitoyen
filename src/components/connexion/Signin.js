@@ -82,6 +82,7 @@ class Signin extends Component {
     // Envoi d'infos dans le cloud Firestore
     firestore.doc(`usersinfo/${user.uid}`).set({
       name: username,
+      candidatures: [],
       email,
       credits: 0,
       hasCompetences: false,

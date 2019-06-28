@@ -20,6 +20,7 @@ class SeeAnnounce extends Component {
     this.state = {
       message: '',
       buttonPostuler: 'inline',
+      user: {},
     };
   }
 
@@ -76,7 +77,7 @@ class SeeAnnounce extends Component {
   };
 
   sendMyApplication = () => {
-    const { annonce, apply } = this.state;
+    const { annonce, apply, user } = this.state;
 
     if (
       annonce[0].postulants
@@ -98,6 +99,13 @@ class SeeAnnounce extends Component {
             id: localStorage.getItem('userId'),
             date: Date(Date.now()).toString(),
           }),
+        });
+        firebase
+        .firestore()
+        .collection('usersinfo')
+        .doc(user.uid)
+        .update({
+          candidatures: firebase.firestore.FieldValue.arrayUnion(id),
         });
       this.setState({
         buttonPostuler: 'none',

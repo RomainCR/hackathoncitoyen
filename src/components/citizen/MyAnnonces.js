@@ -9,6 +9,9 @@ class MyAnnonces extends Component {
     this.state = {
       annonces: [],
     };
+  }
+
+  componentDidMount() {
     this.getAnnounceFromDB();
   }
 
@@ -33,15 +36,11 @@ class MyAnnonces extends Component {
 
   render() {
     const { annonces } = this.state;
-    console.log(annonces && annonces[0] && annonces[0].data)
     return (
       <div>
-        {annonces && annonces.filter(annonce => annonce.data.postulants.map(e => e.id === localStorage.getItem('userId')))
-            .map(annonce => (
-              <div key={annonce.data.createur}>
-                <ListAnnonce annonce={annonce} />
-              </div>
-            ))}
+        {annonces.length > 0 && annonces.map(annonce => annonce.data.postulants)
+          .map(annonce => annonce.map(one => one.id)
+          .map(id => id === localStorage.getItem('userId'))).map(test => console.log(test))}         
       </div>
     );
   }

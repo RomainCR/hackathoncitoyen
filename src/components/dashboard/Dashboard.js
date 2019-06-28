@@ -59,7 +59,6 @@ class Dashboard extends React.Component {
   };
   getthematiqueFromDB = () => {
     const { firestore } = this.props;
-
     const themRef = firestore.collection('category').doc('thematique');
     const thematiques = [];
     themRef.get().then((document) => {
