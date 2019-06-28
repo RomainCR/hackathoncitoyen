@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import FirebaseProvider from './Firebase/FirebaseProvider';
 import Dashboard from './components/dashboard/Dashboard';
 import ChangeProfile from './components/citizen/ChangeProfile';
@@ -24,7 +24,7 @@ import './App.css';
 const App = () => (
   <div className="App">
     <FirebaseProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Welcome} />
           <Route path="/createAnnonce" component={CreateAnnonce} />
@@ -40,7 +40,6 @@ const App = () => (
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
-  
           <Route path="/applyList" component={applyList} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
@@ -48,7 +47,7 @@ const App = () => (
         </Switch>
         {' '}
         <BottomNav />
-      </HashRouter>
+      </BrowserRouter>
     </FirebaseProvider>
   </div>
 );
