@@ -63,14 +63,14 @@ class SpendCredit extends Component {
   render() {
     const { items, userInfo } = this.state;
     return (
-      <div>
+      <div style={{marginBottom: '50px'}}>
 
         <p style={{fontWeight: 'bold'}}>Activités accessibles avec vos crédits</p>
         <p style={{fontSize: '0.8em'}}>Rendez-vous directement dans les infrastructures pour les utiliser</p>
         <Avatar style={{ marginTop: '20%'}} />
         <Coins position="center" userInfo={userInfo} />
-        <Grid container>
-          {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}
+        <Grid container >
+          {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} user={userInfo} />) : null}
           {" "}
         </Grid>
       </div>
