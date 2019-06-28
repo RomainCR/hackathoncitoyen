@@ -13,7 +13,7 @@ class infoUser extends Component {
     super(props);
     this.state = {
       bio: '',
-      thématiquelist: [],
+      thematiquelist: [],
       myThematiques: [],
     };
   }

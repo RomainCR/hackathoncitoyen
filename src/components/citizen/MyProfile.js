@@ -53,7 +53,7 @@ class MyProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });
@@ -69,7 +69,6 @@ class MyProfile extends Component {
 
   render() {
     const { userInfo, error } = this.state;
-    const mapArray = new Array(3).fill(3);
     return (
       <div>
         <ArrowBack
@@ -82,10 +81,10 @@ class MyProfile extends Component {
           <h1>Mon profil</h1>
           <Link to="/changeprofile"><Edit /></Link>
         </div>
-        <Coins position="center" userInfo={userInfo} />
-        {mapArray.map(() => (
-          <StarIcon style={{ width: '40px', height: '40px' }} />
-        ))}
+        <p style={{ fontWeight: 'bold', margin: '0' }}>Mes crédits :</p>
+        <Link to="/SpendCredits">
+          <Coins position="center" userInfo={userInfo} />
+        </Link>
         {' '}
         {userInfo
           ? (

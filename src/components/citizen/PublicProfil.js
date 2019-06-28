@@ -30,16 +30,12 @@ class PublicProfil extends Component {
 
   render() {
     const { userInfo } = this.state;
-    const mapArray = new Array(3).fill(3);
     return (
       <>
         <h1>Profil de
           {' '}
           {userInfo && userInfo.name}
         </h1>
-        {mapArray.map(() => (
-          <StarIcon style={{ width: '40px', height: '40px' }} />
-        ))}
         <InfoUserPublic userInfo={userInfo} />
         <a href={`mailto:${userInfo && userInfo.email}`}>
           <Button
