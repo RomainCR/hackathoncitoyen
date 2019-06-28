@@ -166,6 +166,10 @@ class Dashboard extends React.Component {
           {choice && userInfo && userInfo.isAgent && annonces.length > 0 ? (<><h1>Profils : {choice}</h1><AgentUserView choice={choice} /></>) : (annonces.filter(annonce => !showAll ? annonce.data.thematique.includes(choice) : annonce.data.thematique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />))}
           {choice === 'all' && userInfo && userInfo.isAgent ? <AgentUserView /> : null}
         </Grid>
+        <Grid container justify="center">
+          <p>En ce moment dans votre ville</p>
+          <TwitterTimeline />
+        </Grid>
       </div>
     );
   }

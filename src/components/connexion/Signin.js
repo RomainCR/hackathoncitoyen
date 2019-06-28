@@ -168,7 +168,7 @@ class Signin extends Component {
               <TextField
                 required
                 id="password"
-                label="Confirmer le mot de passe"
+                label="Confirmer mot de passe"
                 name="passwordTwo"
                 className='textfield'
                 value={passwordTwo}
