@@ -1,6 +1,6 @@
 {
   "lang" : "fr",
-  "name" : "Unicity",
+  "name" : "UniCity",
   "short_name" : "UniCity",
   "icons" :   [
     {
@@ -17,6 +17,6 @@
   "theme_color" : "#92C6D6",
   "background_color" : "#347B98",
   "start_url" : "/",
-  "display" : "standalone",
+  "display" : "fullscreen",
   "orientation" : "portrait"
  }
