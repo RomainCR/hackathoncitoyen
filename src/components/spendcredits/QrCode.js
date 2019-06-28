@@ -4,6 +4,7 @@ let QRCode = require('qrcode.react');
 const QrCode = (props) => {
   const value = parseInt(props.location.state.value.prix.split('c'))
   const id = props.location.state.id
+  console.log(id)
   return ( <div> <QRCode style={{width: '50%', height: '50%', marginTop: '89px'}} value={`https://unicity.netlify.com/SendCredits/${value}/${id}`} />
   <div>  
     <h1>  

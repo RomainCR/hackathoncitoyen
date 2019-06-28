@@ -15,8 +15,9 @@ class SendCredits extends Component {
     const { match } = this.props
     const value = parseInt(match.params.montant)
     const id = match.params.id
+    console.log(id)
     console.log(match)
-    firebase.firestore().doc(`usersinfo/${id}`).update({
+    firebase.firestore().collection(usersinfo).doc(`${id}`).update({
       credits: firebase.firestore.FieldValue.increment(-value),
     });
     
