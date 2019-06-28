@@ -40,7 +40,9 @@ const ListAnnonce = props => {
 
   const redirectToAnnounce = () => {
     const { history } = props
-    history.push(`annonce/${props.annonce.id}`)
+    if (!props.nolink) {
+      history.push(`annonce/${props.annonce.id}`)
+    }
   }
 
   const putImage = (annonce) => {
@@ -70,23 +72,23 @@ const ListAnnonce = props => {
       <Paper className={classes.paper}>
         <Grid container spacing={2} justify="center" alignItems="center" onClick={redirectToAnnounce}>
           <Grid item>
-            <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src="https://cdn-s-www.estrepublicain.fr/images/2FEBE9B7-9548-4DAE-B497-F98F1ED73A43/LER_22/les-travaux-devraient-se-poursuivre-jusqu-a-la-fin-de-la-semaine-photo-er-patricia-louis-1554224789.jpg" />
+            <ButtonBase className={classes.image} style={{ backgroundColor: '#347B98' }}>
+              <img className={classes.img} alt="complex" src={props.annonce.data.url ? props.annonce.data.url : putImage(props.annonce)} />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  {props.annonce.data.titre}
+                  {props.annonce.data.titre && props.annonce.data.titre}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                  {props.annonce.data.description}
+                  {props.annonce.data.description && props.annonce.data.description}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">{props.annonce.data.points}</Typography>
+              <Typography variant="subtitle1">{props.annonce.data.points && props.annonce.data.points}{' '}cts</Typography>
             </Grid>
           </Grid>
         </Grid>

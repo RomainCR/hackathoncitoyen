@@ -2,7 +2,8 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ImageAnonceUpload from './ImageAnnonceUpoad';
-import SelectField from './SelectFields';
+import SelectField from './SelectFields'
+import { withRouter } from 'react-router';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 
 class CreateAnnonce extends React.Component {
@@ -45,7 +46,7 @@ class CreateAnnonce extends React.Component {
   }
 
   sendAnnounce = () => {
-    const { firestore } = this.props;
+    const { firestore, history } = this.props;
     const {
       url,
       titre,
@@ -63,6 +64,7 @@ class CreateAnnonce extends React.Component {
       createur: localStorage.getItem('userId'),
       points,
     });
+    history.push('/dashboard')
   };
 
   sendFree = () => {
@@ -192,4 +194,4 @@ class CreateAnnonce extends React.Component {
   }
 }
 
-export default withFirebaseContext(CreateAnnonce);
+export default withRouter(withFirebaseContext(CreateAnnonce));

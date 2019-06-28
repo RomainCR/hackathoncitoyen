@@ -47,7 +47,6 @@ class SpendCredit extends Component {
     const items = [];
     firestore
       .collection("FreeItem")
-
       .get()
       .then(querySnapshot => {
         querySnapshot.docs.forEach(doc => {
@@ -66,12 +65,13 @@ class SpendCredit extends Component {
     return (
       <div>
 
-        <p style={{fontWeight: 'bold'}}>Utiliser vos crédits</p>
+        <p style={{fontWeight: 'bold'}}>Activités accessibles avec vos crédits</p>
         <p style={{fontSize: '0.8em'}}>Rendez-vous directement dans les infrastructures pour les utiliser</p>
         <Avatar style={{ marginTop: '20%'}} />
         <Coins position="center" userInfo={userInfo} />
         <Grid container>
-          {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}{" "}
+          {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}
+          {" "}
         </Grid>
       </div>
     );

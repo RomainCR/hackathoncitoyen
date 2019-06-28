@@ -13,17 +13,23 @@ class ApplyList extends Component {
     this.findUserProfile();
     const { id } = this.props
     const annonceRef = firebase.firestore().collection("annonces").doc(id);
-    annonceRef.get().then((document) => {   
+    annonceRef.get().then((document) => {
       const annonce = document.data();
       console.log(annonce)
-    if (annonce.inProgress === true) {
-      this.setState({
-        engaged : true,
-        message : 'Mission en cours de réalisation'
-      })
-    }
-
-   } );
+      if (annonce.inProgress === true) {
+        this.setState({
+          engaged: true,
+          message: 'Mission en cours de réalisation',
+          ended: false,
+        });
+      } else if (annonce.over === true) {
+        this.setState({
+          engaged: true,
+          message: 'Mission finie',
+          ended: true,
+        });
+      }
+    });
   }
 
   findUserProfile = () => {
@@ -46,22 +52,44 @@ class ApplyList extends Component {
         this.findUser();
       });
   };
+
   updateToInProgress = (name) => {
-    
+
     const { id } = this.props;
- 
+
     const annonceRef = firebase.firestore().collection("annonces").doc(id);
     annonceRef.update({
       inProgress: true
 
     });
     this.setState({
-      message : `${name} a été engagé !`,
-      engaged : true
+      message: `${name} a été engagé !`,
+      engaged: true
     })
 
 
-  
+
+  };
+
+  updateOver = (uid) => {
+
+    const { id, annonce } = this.props;
+    const value = parseInt(annonce[0].points, 10);
+
+    firebase.firestore().doc(`usersinfo/${uid}`).update({
+      credits: firebase.firestore.FieldValue.increment(value),
+    });
+
+    const annonceRef = firebase.firestore().collection("annonces").doc(id);
+    annonceRef.update({
+      inProgress: false,
+      over: true,
+    });
+    this.setState({
+      message: `Mission finie !`,
+      engaged: true,
+      ended: true,
+    });
   };
 
   findUser = () => {
@@ -82,27 +110,27 @@ class ApplyList extends Component {
   };
 
   render() {
-    const { match, message, engaged } = this.state;
-    console.log(match);
+    const { match, message, engaged, ended } = this.state;
     return (
       <div>
         <div>
           {" "}
           <h1>Postulants</h1>{" "}
         </div>
-        <p>
+        <div>
           {match.length > 0
             ? match[0].map(user => (
               <>
                 <p>
                   {" "}
-                  <Link to={`/publicprofile/${user.uid}`}> {user.name} </Link>
-                 {!engaged  ?  <Button onClick={() => {this.updateToInProgress(user.name)}}>Engager</Button> : null}
-                   </p> <p>{message ? message : null}</p>
-               </>
-              ))
-            : null}{" "}
-        </p>
+                  <Link style={{ color: 'black' }} to={`/publicprofile/${user.uid}`}> {user.name} </Link>
+                  {!engaged ? <Button onClick={() => { this.updateToInProgress(user.name) }}>Engager</Button> : null}
+                </p> <p>{message ? message : null}</p>
+                {engaged && !ended && <Button variant="contained" onClick={() => { this.updateOver(user.uid) }}>Valider la mission</Button>}
+              </>
+            ))
+            : "Pas encore de postulant"}{" "}
+        </div>
       </div>
     );
   }

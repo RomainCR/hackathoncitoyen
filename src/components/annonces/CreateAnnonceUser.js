@@ -4,6 +4,8 @@ import SelectField from "./SelectFields";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Input from "@material-ui/core/Input";
+import { withRouter } from 'react-router';
+
 class CreateAnnonceUser extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ class CreateAnnonceUser extends React.Component {
     this.setState({ [name]: event.target.value });
   };
   sendAnnounce = () => {
-    const { firestore } = this.props;
+    const { firestore, history } = this.props;
     const { titre, description, thematique } = this.state;
     const annonceRef = firestore.collection("annoncesUser").doc();
     annonceRef.set({
@@ -34,6 +36,7 @@ class CreateAnnonceUser extends React.Component {
       createur: localStorage.getItem("userId"),
       postulants : []
     });
+    history.push('/dashboard');
   };
 
   allStateAreFill = () => {
@@ -83,7 +86,7 @@ class CreateAnnonceUser extends React.Component {
     return (
       <div>
         {" "}
-        <h1>Proposer une annonce</h1>{" "}
+        <h1>Faire une suggestion à votre ville</h1>{" "}
         <div>
           <TextField
             required
@@ -131,4 +134,4 @@ class CreateAnnonceUser extends React.Component {
   }
 }
 
-export default withFirebaseContext(CreateAnnonceUser);
+export default withRouter(withFirebaseContext(CreateAnnonceUser));

@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
-console.log(props)
   return (
     <Grid item xs={6} style={{ border: '1px solid black'}}>
     <Card className={classes.card}>

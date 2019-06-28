@@ -55,7 +55,7 @@ class Signin extends Component {
             this.users(user);
           })
           .catch((error) => {
-            this.setState({ error });
+            console.log(error.message);
           });
       } else {
         this.setState({ error: 'Code administratif invalide' })

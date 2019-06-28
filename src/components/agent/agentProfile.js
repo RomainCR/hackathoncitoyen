@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 import ListAnnonce from '../dashboard/ListAnnonce';
+import Forum from '@material-ui/icons/Forum';
+import { Link } from 'react-router-dom';
 
 
 class agentProfile extends Component {
@@ -101,6 +103,12 @@ class agentProfile extends Component {
               </div>
             ))}
         </div>
+        <div>
+          <h3>Suggestions des citoyens</h3>
+          <Forum />
+          {' '}
+          <Link style={{color: "black"}} to="/signalements/">Voir les nouveaux messages</Link>
+        </div>
         <Button
           size="large"
           type="button"
@@ -109,6 +117,7 @@ class agentProfile extends Component {
           style={{
             margin: '30px 0 30px 0',
             width: '300px',
+            marginBottom: '70px',
           }}
           className="Button"
         >
