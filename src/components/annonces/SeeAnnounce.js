@@ -19,7 +19,7 @@ class SeeAnnounce extends Component {
     super(props);
     this.state = {
       message: '',
-      buttonPostuler: 1,
+      buttonPostuler: 'inline',
     };
   }
 
@@ -100,7 +100,7 @@ class SeeAnnounce extends Component {
           }),
         });
       this.setState({
-        buttonPostuler: 0,
+        buttonPostuler: 'none',
         message: 'Votre candidature a bien été prise en compte.',
         apply: true,
       });
@@ -119,7 +119,6 @@ class SeeAnnounce extends Component {
     const {
       annonce, message, id, user, buttonPostuler,
     } = this.state;
-    console.log(buttonPostuler);
 
     return (
       <div>
@@ -186,13 +185,13 @@ class SeeAnnounce extends Component {
                 }}
                 style={{
                   marginTop: '50px',
-                  opacity: buttonPostuler,
+                  display: buttonPostuler,
                 }}
                 variant="contained"
               >
                 Postuler
               </Button>
-              <p>{message}</p>
+              <p style={{ marginTop: '80px' }}>{message}</p>
             </>
           )
             : (
