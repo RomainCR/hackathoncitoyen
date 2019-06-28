@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import ListAnnonce from '../dashboard/ListAnnonce';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
-import * as firebase from 'firebase';
 
 class MyAnnonces extends Component {
   constructor(props) {
@@ -33,16 +33,9 @@ class MyAnnonces extends Component {
 
   render() {
     const { annonces } = this.state;
-    console.log(annonces && annonces[0] && annonces[0].data)
+    // console.log((annonces && annonces[0] && annonces[0].data.postulants).map(x => x), 'ann');
     return (
-      <div>
-        {annonces && annonces.filter(annonce => annonce.data.postulants.map(e => e.id === localStorage.getItem('userId')))
-            .map(annonce => (
-              <div key={annonce.data.createur}>
-                <ListAnnonce annonce={annonce} />
-              </div>
-            ))}
-      </div>
+      <div />
     );
   }
 }
