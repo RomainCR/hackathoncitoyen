@@ -88,7 +88,9 @@ const ListAnnonce = props => {
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">{props.annonce.data.points && props.annonce.data.points}{' '}cts</Typography>
+              <Typography variant="subtitle1">{props.annonce.data.points && props.annonce.data.points}
+                {' '}
+                {props.annonce.data.points && "cts"}</Typography>
             </Grid>
           </Grid>
         </Grid>

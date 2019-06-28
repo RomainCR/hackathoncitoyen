@@ -40,7 +40,7 @@ function BottomNav(props) {
       docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
       getInfo(docRef);
     } else {
-      const { auth } = this.props;
+      const { auth } = props;
       auth.onAuthStateChanged((user) => {
         if (user) {
           docRef = firestore.doc(`usersinfo/${user.uid}`);
@@ -48,7 +48,7 @@ function BottomNav(props) {
         }
       });
     }
-  }, [userInfo.length, firestore]);
+  }, [userInfo.length, firestore, props]);
 
   function handleChange(event, newValue) {
     setValue(newValue);
