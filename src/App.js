@@ -15,7 +15,10 @@ import SpendCredits from './components/spendcredits/SpendCredits';
 import MyProfile from './components/citizen/MyProfile';
 import PublicProfile from './components/citizen/PublicProfil';
 import agentProfile from './components/agent/agentProfile';
+import Signalements from './components/agent/Signalements';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
+import applyList from './components/apply/applyList';
+
 import './App.css';
 
 const App = () => (
@@ -33,9 +36,12 @@ const App = () => (
           <Route path="/agentprofile" component={agentProfile} />
           <Route path="/publicprofile/:uid?" component={PublicProfile} />
           <Route path="/home" component={Home} />
+          <Route path="/signalements" component={Signalements} />
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
+  
+          <Route path="/applyList" component={applyList} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />

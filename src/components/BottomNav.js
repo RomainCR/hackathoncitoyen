@@ -2,21 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Icon from '@material-ui/core/Icon';
 import Edit from '@material-ui/icons/Edit';
 import AccountBox from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import BookIcon from '@material-ui/icons/Book';
 import { withRouter } from 'react-router';
 import withFirebaseContext from '../Firebase/withFirebaseContext';
 
 const useStyles = makeStyles({
   root: {
-    marginTop:'20px',
+    marginTop: '20px',
     width: '100%',
     position: 'fixed',
-    bottom: '0'
+    bottom: '0',
+    backgroundColor: '#46A0BC',
   },
 });
 
@@ -57,9 +56,9 @@ function BottomNav(props) {
   return (
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
       <BottomNavigationAction onClick={() => {history.push('/dashboard')}} value="recents" label="Dashboard" icon={<HomeIcon />} />
-      <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" label="Récompense" icon={<BookIcon />} />
-      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/agentprofile')} : () => {history.push('/myProfile')} } label="Profile" icon={<AccountBox />} />
-      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/createannonce')} : () => {history.push('/createAnnonceUser')} } label="Annonce" icon={<Edit />} />
+      {userInfo && userInfo.isAgent ? null : <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" label="Récompenses" icon={<BookIcon />} />}
+      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/agentprofile')} : () => {history.push('/myProfile')} } label="Profil" icon={<AccountBox />} />
+      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/createannonce')} : () => {history.push('/createAnnonceUser')} } label="Annonces" icon={<Edit />} />
     </BottomNavigation>
   );
 }
