@@ -14,8 +14,9 @@ class SendCredits extends Component {
   updateOver = () => {
     const { match } = this.props
     const value = parseInt(match.params.montant)
+    const id = match.params.id
     console.log(match)
-    firebase.firestore().doc(`usersinfo/${localStorage.getItem('userId')}`).update({
+    firebase.firestore().doc(`usersinfo/${id}`).update({
       credits: firebase.firestore.FieldValue.increment(-value),
     });
     
@@ -23,7 +24,7 @@ class SendCredits extends Component {
 
  
   render() { 
-    return (  <div><h1>Merci de contribuer au bien être de notre communauté ! </h1></div>);
+    return (  <div><h1>L'utilisateur a bien été débité !</h1></div>);
   }
 }
  
