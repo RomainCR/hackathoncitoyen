@@ -10,7 +10,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 })
 );
 
-const ListAnnonce = props => {
+const ListAnnonce = (props) => {
   const classes = useStyles();
 
   const redirectToAnnounce = () => {
