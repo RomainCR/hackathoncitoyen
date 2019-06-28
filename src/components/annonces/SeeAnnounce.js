@@ -199,7 +199,11 @@ class SeeAnnounce extends Component {
               <ApplyList id={id} annonce={annonce} />
             )
         ) : null}
-        <div style={{ paddingTop: '30px' }}>
+        <div style={{
+          paddingTop: '30px',
+          marginBottom: '80px',
+        }}
+        >
           <TwitterHashtagButton
             tag="uniCity"
           />
