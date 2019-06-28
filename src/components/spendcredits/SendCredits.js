@@ -13,25 +13,26 @@ class SendCredits extends Component {
 
 
   getUser = () => {
-      const user = [];
+      let user = [];
       firebase.
         firestore().doc(`usersinfo/${localStorage.getItem('userId')}`)
   
         .get()
-        .then(querySnapshot => {
-            console.log(querySnapshot)
-            user.push(querySnapshot.data());
-          });
-  
+        .then((doc) => {
+            console.log(doc.data())
+            user = doc.data()
+         
           this.setState({
             user
-          });
-      
-      this.updateOver()
+          }) }).then( () => {     this.updateOver() }
+    )
+   
+    
   }
   
   updateOver = () => {
    const {user} = this.state
+   console.log(user)
    if (user.isAgent === true) {   
  
     const { match } = this.props
