@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import FirebaseProvider from './Firebase/FirebaseProvider';
 import MyAnnonces from './components/citizen/MyAnnonces';
 import Dashboard from './components/dashboard/Dashboard';
@@ -19,13 +19,15 @@ import agentProfile from './components/agent/agentProfile';
 import Signalements from './components/agent/Signalements';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
 import applyList from './components/apply/applyList';
+import QrCode from './components/spendcredits/QrCode';
+import SendCredits from './components/spendcredits/SendCredits';
 
 import './App.css';
 
 const App = () => (
   <div className="App">
     <FirebaseProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Welcome} />
           <Route path="/createAnnonce" component={CreateAnnonce} />
@@ -42,15 +44,16 @@ const App = () => (
           <Route path="/connect" component={Connect} />
           <Route path="/profile" component={Connect} />
           <Route path="/reset" component={PasswordForget} />
-  
+          <Route path="/qrcode" component={QrCode} />
           <Route path="/applyList" component={applyList} />
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
+          <Route path="/SendCredits/:montant" component={SendCredits} />
         </Switch>
         {' '}
         <BottomNav />
-      </HashRouter>
+      </BrowserRouter>
     </FirebaseProvider>
   </div>
 );
