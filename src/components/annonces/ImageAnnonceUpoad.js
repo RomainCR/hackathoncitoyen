@@ -40,7 +40,7 @@ class ImageAnnonceUpload extends Component {
         <input type="file" onChange={this.handleChange} />
         <button type="button" onClick={this.handleUpload}>Upload</button>
         {' '}
-        {url && <img style={{ width: '70%' }} src={url} alt="uploaded img" />}
+        {url && <img style={{ width: '50%' }} src={url} alt="uploaded img" />}
       </div>
     );
   }
