@@ -144,7 +144,7 @@ class Dashboard extends React.Component {
             <p style={{ fontSize: '0.9em' }}>
               {userInfo && userInfo.isAgent ? "Trouvez un profil pour aider la communauté" : "Touvez une annonce pour aider votre communauté"}
             </p>
-            <Button style={{marginBottom: '8px', border: "solid 1px #656a6b"}} onClick={() => {
+            <Button style={{ marginBottom: '8px', border: "solid 1px #656a6b" }} onClick={() => {
               this.setState({
                 showAll: true,
                 choice: 'all'
@@ -156,14 +156,15 @@ class Dashboard extends React.Component {
         )
         }
 
-        <Grid container>
+        <Grid container justify="center">
           {!choice ? thematiques.map(thematique => <MediaCard category={thematique} onChoice={this.handleChoice} />) : null}
-          {choice && userInfo && userInfo.isAgent && annonces.length > 0 ? (<AgentUserView choice={choice} />) : (annonces.filter(annonce => !showAll ? annonce.data.thematique.includes(choice) : annonce.data.thematique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />))}
         </Grid>
 
-        <Grid container>
+        <Grid container justify="center">
+          {choice && userInfo && !userInfo.isAgent && annonces.length > 0 && !showAll && <h1>Annonces de{' '}{choice}</h1>}
+          {choice && userInfo && !userInfo.isAgent && annonces.length > 0 && showAll && <h1>Toutes les annonces</h1>}
+          {choice && userInfo && userInfo.isAgent && annonces.length > 0 ? (<><h1>Profils : {choice}</h1><AgentUserView choice={choice} /></>) : (annonces.filter(annonce => !showAll ? annonce.data.thematique.includes(choice) : annonce.data.thematique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />))}
           {choice === 'all' && userInfo && userInfo.isAgent ? <AgentUserView /> : null}
-          {choice && userInfo && !userInfo.isAgent && annonces.length > 0 ? annonces.filter(annonce => !showAll ? annonce.data.thematique.includes(choice) : annonce.data.thematique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />) : null}
         </Grid>
       </div>
     );

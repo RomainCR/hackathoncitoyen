@@ -25,7 +25,6 @@ const useStyles = makeStyles({
 export default function MediaCard(props) {
   const classes = useStyles();
   const putImage = (thematique) => {
-    console.log(thematique)
     if (thematique === "Nature et jardinage") {
       return  'https://i.ibb.co/gRxQRNC/nature.png'
     }
@@ -48,7 +47,6 @@ return 'https://i.ibb.co/9YqWPBC/brico.png'
   return (
     <Grid item xs={6} >
     <Card className={classes.card}>
-    {console.log(props)}
       <CardActionArea onClick={() => { props.onChoice(props.category)}}>
         <CardMedia
           className={classes.media}

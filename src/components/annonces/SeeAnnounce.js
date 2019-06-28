@@ -9,6 +9,8 @@ import UntouchableCard from "./UntouchableCard";
 import * as firebase from "firebase";
 import ApplyList from "../apply/applyList";
 import ArrowBack from "@material-ui/icons/ArrowBack";
+
+
 class SeeAnnounce extends Component {
   constructor(props) {
     super(props);
@@ -59,10 +61,10 @@ class SeeAnnounce extends Component {
   };
   updateToInProgress = () => {
     const { firestore } = this.props;
-    const { id} = this.state
+    const { id } = this.state
     const annonceRef = firestore.collection("annonces").doc(id);
     annonceRef.update({
-      inProgress : true
+      inProgress: true
     });
   };
 
@@ -102,7 +104,7 @@ class SeeAnnounce extends Component {
       this.setState({
         message: `Vous avez déjà postulé à cette annonce le ${
           date[0].date
-        } , votre candidature sera traitée dans les plus brefs délais.`
+          } , votre candidature sera traitée dans les plus brefs délais.`
       });
     }
   };
@@ -127,8 +129,8 @@ class SeeAnnounce extends Component {
         {annonce ? (
           <>
             {" "}
-            <p style={{ marginTop: "20px" }}>{annonce[0].titre}</p>{" "}
-            <UntouchableCard user={user}/>
+            <h1 style={{ marginTop: "20px" }}>{annonce[0].titre}</h1>{" "}
+            <UntouchableCard annonce={annonce[0]} />
             <p style={{ marginTop: "20px" }}>
               {annonce[0].points}{" "}
               <img
@@ -146,34 +148,34 @@ class SeeAnnounce extends Component {
             </p>{" "}
             <div style={{ marginTop: "50px" }}>
               {" "}
-              <TextField
-                disabled
-                multiline
-                rows="5"
-                style={{ width: "100%", backgroundColor: "grey" }}
-                value={annonce[0].description}
-              />
-            </div>{" "}
-            <p>{message}</p>
+              <div
+                style={{ padding:"9px", marginTop: "50px", width: "100%", backgroundColor: "#dad8d8", color: "black" }}
+              >
+                {annonce[0].description}
+              </div>
+              {" "}
+              <p>{message}</p>
+            </div>
           </>
         ) : (
-          <p> loading..</p>
-        )}{" "}
+            <p> loading..</p>
+          )}{" "}
         {annonce ? (
-          user[0].isAgent === false ? <>  <h1>Vous souhaitez vous investir dans la vie de votre ville ?</h1> 
-            
+          user[0].isAgent === false ? <>  <h2>Vous souhaitez vous investir dans la vie de votre ville ?</h2>
+
             <Button
               onClick={() => {
                 this.sendMyApplication();
               }}
               style={{ marginTop: "50px" }}
+              variant="contained"
             >
               Postuler
             </Button>
-            </>
-           : (
-            <ApplyList id={id} annonce={annonce} />
-          )
+          </>
+            : (
+              <ApplyList id={id} annonce={annonce} />
+            )
         ) : null}
       </div>
     );
