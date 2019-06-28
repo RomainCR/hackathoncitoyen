@@ -1,158 +1,201 @@
-import React from "react";
-import withFirebaseContext from "../../Firebase/withFirebaseContext";
-import SelectField from "./SelectFields"
-import TextField from "@material-ui/core/TextField";
-import Button from '@material-ui/core/Button'
-import Input from '@material-ui/core/Input'
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router';
+import ImageAnonceUpload from './ImageAnnonceUpoad';
+import SelectField from './SelectFields';
+import withFirebaseContext from '../../Firebase/withFirebaseContext';
+
 class CreateAnnonce extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      errorMessage: "",
-      titre : '',
-      description : '',
-      thématique : [],
-      points : '',
-      thématiquelist : []
+      errorMessage: '',
+      titre: '',
+      description: '',
+      thematique: '',
+      points: '',
+      thematiquelist: [],
+      url: '',
     };
   }
 
-
   componentDidMount() {
-    this.getThématiqueFromDB();
+    this.getthematiqueFromDB();
   }
 
-  handleChange = name => event => {
-    
+  handleChange = name => (event) => {
     if (name === 'points') {
-      console.log('test')
+      console.log('test');
       const value = event.target.value.replace(/[^\d]/g, '');
 
-        this.setState({ [name]: value });
-      } else {
-        this.setState({
-          errorMessage: "Veuillez entrer un nombre"
-        });
-      }
-     if (name !== 'points') {
+      this.setState({ [name]: value });
+    } else {
+      this.setState({
+        errorMessage: 'Veuillez entrer un nombre',
+      });
+    }
+    if (name !== 'points') {
       this.setState({ [name]: event.target.value });
     }
   };
+
+  handleThematiqueChange = () => (event) => {
+    this.setState({ thematique: event.target.value });
+  }
+
+  getImage = (url) => {
+    this.setState({ url });
+  }
+
   sendAnnounce = () => {
-    const { firestore } = this.props;
-    const { titre, description, thématique, points } = this.state;
-    const annonceRef = firestore.collection("annonces").doc();
-    annonceRef.set({
+    const { firestore, history } = this.props;
+    const {
+      url,
       titre,
       description,
-      thématique,
-      createur: localStorage.getItem("userId"),
-      points
+      thematique,
+      points,
+    } = this.state;
+    const annonceRef = firestore.collection('annonces').doc();
+    annonceRef.set({
+      url,
+      titre,
+      description,
+      postulants: [],
+      thematique,
+      createur: localStorage.getItem('userId'),
+      points,
     });
+    history.push('/dashboard')
   };
+
   sendFree = () => {
     const { firestore } = this.props;
-    const { titre, description, thématique, points } = this.state;
-    const annonceRef = firestore.collection("FreeItem").doc();
+    const annonceRef = firestore.collection('FreeItem').doc();
     annonceRef.set({
-      nom : (Math.floor(Math.random() * 50000)),
+      nom: (Math.floor(Math.random() * 50000)),
       description: (Math.floor(Math.random() * 50000)),
-      prix: (Math.floor(Math.random() * 50000))
-     
+      prix: (Math.floor(Math.random() * 50000)),
     });
   };
-  
 
   allStateAreFill = () => {
-    const { titre, description, thématique, points } = this.state;
-    if (titre && description && thématique && points) {
+    const {
+      titre,
+      description,
+      thematique,
+      points,
+    } = this.state;
+    if (titre && description && thematique && points) {
       return true;
     }
     this.setState({
-      errorMessage: " Tous les champs sont requis"
+      errorMessage: 'Tous les champs sont requis',
     });
     return false;
   };
+
+  getthematiqueFromDB = () => {
+    const { firestore } = this.props;
+
+    const themRef = firestore.collection('category').doc('thematique');
+    const thematique = [];
+    themRef.get().then((document) => {
+      const dbCategory = document.data();
+      for (const [, value] of Object.entries(dbCategory)) {
+        thematique.push(`${value}`);
+      }
+      this.setState({
+        thematiquelist: thematique,
+      });
+    });
+  };
+
   validateAnnounce() {
     if (this.allStateAreFill()) {
       this.sendAnnounce();
     }
   }
 
-  getThématiqueFromDB = () => {
-    const { firestore } = this.props;
-
-    const themRef = firestore.collection("category").doc("thématique");
-    const thématique = [];
-    themRef.get().then(document => {
-      const dbCategory = document.data();
-
-      for (const [, value] of Object.entries(dbCategory)) {
-        thématique.push(`${value}`);
-        console.log(value)
-      }
-
-      this.setState({
-        thématiquelist: thématique
-      });
-    });
-  };
-
   render() {
-    const { description, errorMessage,  points, thématiquelist, thématique, titre } = this.state;
+    const {
+      description,
+      errorMessage,
+      points,
+      thematiquelist,
+      thematique,
+      titre,
+    } = this.state;
     return (
       <div>
-        {" "}
-        <h1>Créer une annonce</h1>{" "}
-        <div>  
+        <h1>Créer une annonce</h1>
+        <ImageAnonceUpload getImage={this.getImage} />
         <TextField
           required
-          id="filled-multiline-flexible"
-          label="titre" 
+          id="outlined-required"
+          label="Titre"
+          defaultValue="Titre"
+          margin="normal"
+          variant="outlined"
           value={titre}
-         
-          rows="1"
-          onChange={this.handleChange("titre")}
-          className="textField"
-         
-        /></div>
+          onChange={this.handleChange('titre')}
+        />
         <div>
-        <TextField
-          required
-          id="filled-multiline-flexible"
-          label="Description"
-          value={description}
-          multiline
-          rows="2"
-          onChange={this.handleChange("description")}
-          className="textField"
-          style={{ marginTop: "2%", marginBottom: "5%", width: "30%" }}
-        /></div>
-
-        <div> 
-        <TextField
-          required
-        
-          label="Points"
-          value={points}
-          rows="1"
-          id="formatted-numberformat-input"
-          onChange={this.handleChange("points")}
-          className="textField"
-        /></div>
-        <div> 
-        <p>{errorMessage}</p> </div>
+          <TextField
+            required
+            id="outlined-multiline-static"
+            label="Description"
+            value={description}
+            multiline
+            rows="5"
+            defaultValue="Description"
+            margin="normal"
+            variant="outlined"
+            onChange={this.handleChange('description')}
+          />
+        </div>
         <div>
-        <SelectField
-          name={"thématique"}
-          choices={thématiquelist}
-          handleChange={this.handleChange}
-          value={thématique}
-        /> </div>
-        <Button onClick={() => {this.sendAnnounce()}} >Publier </Button>
+          <TextField
+            required
+            id="outlined-required"
+            label="Points"
+            defaultValue="Hello World"
+            margin="normal"
+            variant="outlined"
+            value={points}
+            onChange={this.handleChange('points')}
+          />
+        </div>
+        <div>
+          <p>
+            { errorMessage }
+          </p>
+        </div>
+        <div>
+          <SelectField
+            name="Thématique"
+            choices={thematiquelist}
+            handleChange={this.handleThematiqueChange}
+            value={thematique}
+          />
+        </div>
+        <Button
+          size="large"
+          type="button"
+          variant="contained"
+          style={{
+            marginBottom: '70px',
+            width: '300px',
+          }}
+          className="Button"
+          onClick={() => { this.sendAnnounce(); }}
+        >
+          Publier
+        </Button>
       </div>
     );
   }
 }
 
-export default withFirebaseContext(CreateAnnonce);
+export default withRouter(withFirebaseContext(CreateAnnonce));

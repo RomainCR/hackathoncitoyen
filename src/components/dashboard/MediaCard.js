@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     height: 180,
     width: 260,
     border: '1px solid black',
-    backgroundColor: '#FED777',
+    backgroundColor: '#347B98',
   },
 
   
@@ -24,31 +24,29 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
-  const putImage = (thématique) => {
-    console.log(thématique)
-    if (thématique === "Nature et jardinage") {
-      return  'https://i.ibb.co/VpJjRmK/picto00.png'
+  const putImage = (thematique) => {
+    if (thematique === "Nature et jardinage") {
+      return  'https://i.ibb.co/gRxQRNC/nature.png'
     }
-    if (thématique === "Ecologie et nettoyage"){
-    return 'https://i.ibb.co/QjPXXFw/picto02.png'}
+    if (thematique === "Ecologie et nettoyage"){
+    return 'https://i.ibb.co/q1KScvP/ecologie.png'}
 
-    if (thématique === "Loisir et divertissement") {
-        return 'https://i.ibb.co/N97WymJ/picto04.png'
+    if (thematique === "Loisir et divertissement") {
+        return 'https://i.ibb.co/p2gd20D/loisir.png'
     }
-    if (thématique === "Aide à la personne") {
-return  'https://i.ibb.co/M2cQ6S3/picto05.png'
+    if (thematique === "Aide à la personne") {
+return  'https://i.ibb.co/55sdLQw/aide.png'
     }
-    if (thématique === "Réparation et bricolage") {
-return 'https://i.ibb.co/JvXZHR5/picto.png'
+    if (thematique === "Réparation et bricolage") {
+return 'https://i.ibb.co/9YqWPBC/brico.png'
     }
-    if (thématique === "Education") {
-      return 'https://i.ibb.co/kJ95cSp/picto15.png'
+    if (thematique === "Education") {
+      return 'https://i.ibb.co/NWmx5KC/ducation.png'
     }
   }
   return (
     <Grid item xs={6} >
     <Card className={classes.card}>
-    {console.log(props)}
       <CardActionArea onClick={() => { props.onChoice(props.category)}}>
         <CardMedia
           className={classes.media}

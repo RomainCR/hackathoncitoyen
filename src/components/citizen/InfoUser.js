@@ -13,29 +13,29 @@ class infoUser extends Component {
     super(props);
     this.state = {
       bio: '',
-      thématiquelist: [],
+      thematiquelist: [],
       myThematiques: [],
     };
   }
 
   componentDidMount() {
-    this.getThématiqueFromDB();
+    this.getthematiqueFromDB();
   }
 
-  getThématiqueFromDB = () => {
+  getthematiqueFromDB = () => {
     const { firestore } = this.props;
 
-    const themRef = firestore.collection('category').doc('thématique');
-    const thématique = [];
+    const themRef = firestore.collection('category').doc('thematique');
+    const thematique = [];
     themRef.get().then((document) => {
       const dbCategory = document.data();
 
       for (const [, value] of Object.entries(dbCategory)) {
-        thématique.push(`${value}`);
+        thematique.push(`${value}`);
       }
 
       this.setState({
-        thématiquelist: thématique,
+        thematiquelist: thematique,
       });
     });
   };
@@ -79,42 +79,48 @@ class infoUser extends Component {
   handleChange = (e) => {
     // current array of options
     const { myThematiques } = this.state;
-    const thématiques = myThematiques;
+    const thematiques = myThematiques;
     let index;
 
     // check if the check box is checked or unchecked
     if (e.target.checked) {
       // add the numerical value of the checkbox to options array
-      thématiques.push(e.target.value);
-      console.log(thématiques);
+      thematiques.push(e.target.value);
+      console.log(thematiques);
     } else {
       // or remove the value from the unchecked checkbox from the array
-      index = thématiques.indexOf(e.target.value);
-      thématiques.splice(index, 1);
+      index = thematiques.indexOf(e.target.value);
+      thematiques.splice(index, 1);
     }
     // update the state with the new array of options
-    this.setState({ myThematiques: thématiques });
+    this.setState({ myThematiques: thematiques });
   }
 
 
   render() {
     const { userInfo } = this.props;
-    const { bio, thématiquelist } = this.state;
+    const { bio, thematiquelist } = this.state;
     return (
       <Grid container justify="center">
         <Grid item xs={12}>
-          <Coins position="center" userInfo={userInfo} />
-        </Grid>
-        <Grid item xs={12}>
           {userInfo.url ? <LargeAvatar img={userInfo.url} /> : <ImageUpload getImage={this.getImage} />}
         </Grid>
-        <div style={{ border: '2px solid black', borderRadius: "10px" }}>
-          <Grid item xs={12}>
+        <div style={{
+          border: '2px solid black',
+          borderRadius: "10px",
+          backgroundColor: "#e6e6e6",
+          margin: "20px",
+          padding: "20px",
+        }}>
+          <Grid item xs={12} 
+            style={{
+            marginBottom: '2px'}}>
             Prénom et nom :
             {' '}
             {userInfo.name}
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{
+            marginBottom: '2px'}}>
             Email :
             {' '}
             {userInfo.email && userInfo.email}
@@ -180,11 +186,11 @@ class infoUser extends Component {
             : (
               <form>
                 <p style={{ fontWeight: 'bold' }}>Indiquer mes compétences :</p>
-                {thématiquelist.length > 0 && thématiquelist.map(thématique => (
+                {thematiquelist.length > 0 && thematiquelist.map(thematique => (
                   <>
                     <div className="input-group">
-                      <label>{thématique}</label>
-                      <input type="checkbox" value={thématique} onChange={this.handleChange} />
+                      <label style={{ fontSize: '1.2em' }}>{thematique}</label>
+                      <input style={{ transform: 'scale(1.3)' }} type="checkbox" value={thematique} onChange={this.handleChange} />
                     </div>
                   </>
                 ))}
@@ -203,7 +209,7 @@ class infoUser extends Component {
               </form>
             )}
         </Grid>
-      </Grid>
+      </Grid >
     );
   }
 }

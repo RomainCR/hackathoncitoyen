@@ -23,6 +23,13 @@ class Connect extends Component {
     const { auth } = this.props;
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            localStorage.setItem('userId', user.uid);
+          }
+        });
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         const { history } = this.props;
         history.push('/dashboard');

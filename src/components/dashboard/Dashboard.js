@@ -1,67 +1,31 @@
-import React from "react";
-import withFirebaseContext from "../../Firebase/withFirebaseContext";
-import TwitterTimeline from "../TwitterTimeline";
-import Avatar from '../Avatar'
+import React from 'react';
 import * as firebase from 'firebase';
-import Button from '@material-ui/core/Button'
-import MediaCard from './MediaCard'
-import Grid from '@material-ui/core/Grid'
-import Coins from '../Coins'
-import ListAnnonce from './ListAnnonce'
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Avatar from '../Avatar';
+import MediaCard from './MediaCard';
+import TwitterTimeline from '../TwitterTimeline';
+import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import Coins from '../Coins';
+import ListAnnonce from './ListAnnonce';
+import AgentUserView from '../AgentUserView';
+import { withRouter } from 'react-router-dom'
+import ArrowBack from '@material-ui/icons/ArrowBack'
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      annonces : [],
-  
+    this.state = {
+      annonces: [],
       error: null,
-  
-      thématiques : []
+      thematiques: [],
     };
   }
- 
-
-  getAnnounceFromDB = () => {
-  
-    const annonces = []
-    firebase
-    .firestore()
-    .collection('annonces')
-   
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.docs.forEach((doc) => {
-        annonces.push({ data: doc.data(), id: doc.id });
-      });
-       this.setState({
-        annonces,
-       })
-    });
-  };
-  getThématiqueFromDB = () => {
-    const { firestore } = this.props;
-
-    const themRef = firestore.collection("category").doc("thématique");
-    const thématiques = [];
-    themRef.get().then(document => {
-      const dbCategory = document.data();
-
-      for (const [, value] of Object.entries(dbCategory)) {
-        thématiques.push(`${value}`);
-      
-      }
-      this.setState({
-        thématiques,
-      })
-
-    
-    });
-  };
 
   componentDidMount() {
-    this.getAnnounceFromDB()
-    this.getThématiqueFromDB()
+    this.findUserProfile()
+    this.getAnnounceFromDB();
+    this.getthematiqueFromDB();
     const { firestore } = this.props;
     let docRef;
     if (localStorage.getItem('userId')) {
@@ -77,6 +41,56 @@ class Dashboard extends React.Component {
       });
     }
   }
+  findUserProfile = () => {
+    const user = [];
+    firebase
+      .firestore()
+      .collection("usersinfo")
+      .doc(`${localStorage.getItem("userId")}`)
+
+      .get()
+      .then(doc => {
+        user.push(doc.data());
+      });
+
+    this.setState({
+      user
+    });
+  };
+  getthematiqueFromDB = () => {
+    const { firestore } = this.props;
+
+    const themRef = firestore.collection('category').doc('thematique');
+    const thematiques = [];
+    themRef.get().then((document) => {
+      const dbCategory = document.data();
+      for (const [, value] of Object.entries(dbCategory)) {
+        thematiques.push(`${value}`);
+      }
+      this.setState({
+        thematiques,
+      });
+    });
+  };
+
+  getAnnounceFromDB = () => {
+    const annonces = [];
+    firebase
+      .firestore()
+      .collection('annonces')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          annonces.push({ data: doc.data(), id: doc.id });
+        });
+        this.setState({
+          annonces,
+        });
+      });
+    this.setState({
+      annonces,
+    });
+  };
 
   getInfo = (docRef) => {
     docRef.get().then((doc) => {
@@ -89,50 +103,76 @@ class Dashboard extends React.Component {
     });
   }
 
-handleChoice = (thématique) => {
-
-  this.setState({
-    choice : thématique
-  })
-}
+  handleChoice = (thematique) => {
+    this.setState({
+      choice: thematique,
+    });
+  }
 
 
   render() {
-    const { annonces, thématiques, choice, userInfo, showAll } = this.state;
- 
+    const {
+      annonces,
+      thematiques,
+      choice,
+      userInfo,
+      showAll, user
+    } = this.state;
+
     return (
-      <div>
-        <button style={{ marginTop: '5%'}} onClick={() => {
-          this.setState({
-            choice : undefined,
-            showAll : false,
-          })
-        }}>reset thématique</button>
-      <Avatar userInfo={userInfo}/>
-      <Coins position="flex-end" userInfo={userInfo}/>
-       {!choice ?  <> <p>Nom de l'application </p>
-        <Button onClick={() => {this.setState({
-          showAll : true,
-          choice : 'all'
-        })}}>Afficher toutes les annonces</Button> </> : null} 
-     
-        
-        <Grid container > 
-      {!choice ?    thématiques.map(thématique =>  <MediaCard category={thématique} onChoice={this.handleChoice}/>  ) : null}
-       
-     
-        
-        {choice ? annonces.filter( annonce => !showAll ? annonce.data.thématique.includes(choice) : annonce.data.thématique.includes('')).map(annonce => <ListAnnonce annonce={annonce}/>) :  null}
-       </Grid>
-    
-        <div style={{ 
-          display: "flex",
-          justifyContent: "center", }}>
-         
-        </div>
+      <div style={{ marginBottom: '60px' }}>
+        {choice ?
+          <ArrowBack
+            style={{ position: 'fixed', left: '10px', top: '10px' }}
+            onClick={() => {
+              const { history } = this.props
+              this.setState({
+                showAll: false,
+                choice: undefined
+              })
+              history.push('/dashboard');
+            }} /> : null}
+
+        {user && user.isAgent === false ? <> <Avatar userInfo={userInfo} />
+          <Coins position="flex-end" userInfo={userInfo} /> </> : null}
+        {!choice && (
+          <>
+            <div style={{ width: '65px', height: '65px', marginLeft: 'auto', marginRight: 'auto', marginTop: '15px' }}>
+              <img style={{ width: '100%', height: '100%' }} src='https://media.discordapp.net/attachments/593438579821248535/593529192453373962/logo.png?width=465&height=468' />
+            </div>
+            <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3>
+            <p style={{ fontSize: '0.9em' }}>
+              {userInfo && userInfo.isAgent ? "Trouvez un profil pour aider la communauté" : "Touvez une annonce pour aider votre communauté"}
+            </p>
+            <Button style={{ marginBottom: '8px', border: "solid 1px #656a6b" }} onClick={() => {
+              this.setState({
+                showAll: true,
+                choice: 'all'
+              })
+            }}>
+              {userInfo && userInfo.isAgent ? 'Afficher tous les profils' : 'Afficher toutes les annonces'}
+            </Button>
+          </>
+        )
+        }
+
+        <Grid container justify="center">
+          {!choice ? thematiques.map(thematique => <MediaCard category={thematique} onChoice={this.handleChoice} />) : null}
+        </Grid>
+
+        <Grid container justify="center">
+          {choice && userInfo && !userInfo.isAgent && annonces.length > 0 && !showAll && <h1>Annonces de{' '}{choice}</h1>}
+          {choice && userInfo && !userInfo.isAgent && annonces.length > 0 && showAll && <h1>Toutes les annonces</h1>}
+          {choice && userInfo && userInfo.isAgent && annonces.length > 0 ? (<><h1>Profils : {choice}</h1><AgentUserView choice={choice} /></>) : (annonces.filter(annonce => !showAll ? annonce.data.thematique.includes(choice) : annonce.data.thematique.includes('')).map(annonce => <ListAnnonce annonce={annonce} />))}
+          {choice === 'all' && userInfo && userInfo.isAgent ? <AgentUserView /> : null}
+        </Grid>
+        <Grid container justify="center">
+          <p>En ce moment dans votre ville</p>
+          <TwitterTimeline />
+        </Grid>
       </div>
     );
   }
 }
 
-export default withFirebaseContext(Dashboard);
+export default withFirebaseContext(withRouter(Dashboard));
