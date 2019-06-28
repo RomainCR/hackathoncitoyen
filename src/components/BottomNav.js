@@ -5,13 +5,13 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Edit from '@material-ui/icons/Edit';
 import AccountBox from '@material-ui/icons/AccountBox';
 import HomeIcon from '@material-ui/icons/Home';
-import BookIcon from '@material-ui/icons/Book';
+import LocalPlay from '@material-ui/icons/LocalPlay';
 import { withRouter } from 'react-router';
 import withFirebaseContext from '../Firebase/withFirebaseContext';
 
 const useStyles = makeStyles({
   root: {
-    marginTop: '20px',
+   
     width: '100%',
     position: 'fixed',
     bottom: '0',
@@ -55,10 +55,10 @@ function BottomNav(props) {
   }
   return (
     <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-      <BottomNavigationAction onClick={() => {history.push('/dashboard')}} value="recents" label="Dashboard" icon={<HomeIcon />} />
-      {userInfo && userInfo.isAgent ? null : <BottomNavigationAction onClick={() => {history.push('/SpendCredits')}} value="favorites" label="Récompenses" icon={<BookIcon />} />}
-      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/agentprofile')} : () => {history.push('/myProfile')} } label="Profil" icon={<AccountBox />} />
-      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => {history.push('/createannonce')} : () => {history.push('/createAnnonceUser')} } label="Annonces" icon={<Edit />} />
+      <BottomNavigationAction onClick={() => { history.push('/dashboard'); }} value="recents" label="Dashboard" icon={<HomeIcon />} />
+      {userInfo && userInfo.isAgent ? null : <BottomNavigationAction onClick={() => { history.push('/SpendCredits'); }} value="favorites" label="Récompenses" icon={<LocalPlay />} />}
+      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => { history.push('/agentprofile'); } : () => { history.push('/myProfile'); }} label="Profil" icon={<AccountBox />} />
+      <BottomNavigationAction onClick={userInfo && userInfo.isAgent ? () => { history.push('/createannonce'); } : () => { history.push('/createAnnonceUser'); }} label="Annonces" icon={<Edit />} />
     </BottomNavigation>
   );
 }
