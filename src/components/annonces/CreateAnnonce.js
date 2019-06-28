@@ -1,9 +1,9 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import ImageAnonceUpload from './ImageAnnonceUpoad';
-import SelectField from './SelectFields'
 import { withRouter } from 'react-router';
+import ImageAnonceUpload from './ImageAnnonceUpoad';
+import SelectField from './SelectFields';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
 
 class CreateAnnonce extends React.Component {
@@ -41,7 +41,7 @@ class CreateAnnonce extends React.Component {
   };
 
   handleThematiqueChange = () => (event) => {
-    this.setState({ thématique: event.target.value });
+    this.setState({ thematique: event.target.value });
   }
 
   getImage = (url) => {
