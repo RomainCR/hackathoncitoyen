@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import FirebaseProvider from './Firebase/FirebaseProvider';
 import Dashboard from './components/dashboard/Dashboard';
 import ChangeProfile from './components/citizen/ChangeProfile';
@@ -18,15 +18,15 @@ import agentProfile from './components/agent/agentProfile';
 import Signalements from './components/agent/Signalements';
 import SeeAnnounce from './components/annonces/SeeAnnounce';
 import applyList from './components/apply/applyList';
-import QrCode from './components/spendcredits/QrCode'
-import SendCredits from './components/spendcredits/SendCredits'
+import QrCode from './components/spendcredits/QrCode';
+import SendCredits from './components/spendcredits/SendCredits';
 
 import './App.css';
 
 const App = () => (
   <div className="App">
     <FirebaseProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Welcome} />
           <Route path="/createAnnonce" component={CreateAnnonce} />
@@ -51,7 +51,7 @@ const App = () => (
         </Switch>
         {' '}
         <BottomNav />
-      </HashRouter>
+      </BrowserRouter>
     </FirebaseProvider>
   </div>
 );
