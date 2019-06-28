@@ -179,7 +179,7 @@ class SeeAnnounce extends Component {
           user[0].isAgent === false ? (
             <>
               {' '}
-              <h2>Vous souhaitez vous investir dans la vie de votre ville ?</h2>
+              <h4>Vous souhaitez vous investir dans la vie de votre ville ?</h4>
               <Button
                 onClick={() => {
                   this.sendMyApplication();
