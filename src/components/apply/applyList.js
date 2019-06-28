@@ -65,10 +65,7 @@ class ApplyList extends Component {
     this.setState({
       message: `${name} a été engagé !`,
       engaged: true
-    })
-
-
-
+    });
   };
 
   updateOver = (uid) => {
@@ -124,7 +121,7 @@ class ApplyList extends Component {
                 <p>
                   {" "}
                   <Link style={{ color: 'black' }} to={`/publicprofile/${user.uid}`}> {user.name} </Link>
-                  {!engaged ? <Button onClick={() => { this.updateToInProgress(user.name) }}>Engager</Button> : null}
+                  {!engaged && !ended ? <Button onClick={() => { this.updateToInProgress(user.name) }}>Engager</Button> : null}
                 </p> <p>{message ? message : null}</p>
                 {engaged && !ended && <Button variant="contained" onClick={() => { this.updateOver(user.uid) }}>Valider la mission</Button>}
               </>
