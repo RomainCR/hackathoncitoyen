@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import ListAnnonce from '../dashboard/ListAnnonce';
+import Forum from '@material-ui/icons/Forum';
+import { Link } from 'react-router-dom';
 
 
 class agentProfile extends Component {
@@ -8,7 +11,7 @@ class agentProfile extends Component {
     super(props);
     this.state = {
       userInfo: null,
-      error: null,
+      annonces: [],
     };
   }
 
@@ -27,7 +30,24 @@ class agentProfile extends Component {
         }
       });
     }
+    this.getAnnounceFromDB();
   }
+
+  getAnnounceFromDB = () => {
+    const annonces = [];
+    const { firestore } = this.props;
+    firestore
+      .collection('annonces')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          annonces.push({ data: doc.data(), id: doc.id });
+        });
+        this.setState({
+          annonces,
+        });
+      });
+  };
 
   getInfo = (docRef) => {
     docRef.get().then((doc) => {
@@ -47,16 +67,48 @@ class agentProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });
   }
 
   render() {
-    const { userInfo, error } = this.state;
+    const { userInfo, annonces } = this.state;
     return (
       <div>
+        <div style={{
+          border: '2px solid black',
+          borderRadius: "10px",
+          backgroundColor: "#e6e6e6",
+          margin: "20px",
+          padding: "20px",
+        }}>
+          <h2>Administrateur</h2>
+          <p>
+            {userInfo && userInfo.name}
+          </p>
+          <p>
+            Votre email :
+            {' '}
+            {userInfo && userInfo.email}
+          </p>
+        </div>
+        <div>
+          <h3>Vos annonces</h3>
+          {annonces && annonces.filter(annonce => annonce.data.createur === userInfo.uid)
+            .map(annonce => (
+              <div key={userInfo.uid}>
+                <ListAnnonce annonce={annonce} />
+              </div>
+            ))}
+        </div>
+        <div>
+          <h3>Suggestions des citoyens</h3>
+          <Forum />
+          {' '}
+          <Link style={{color: "black"}} to="/signalements/">Voir les nouveaux messages</Link>
+        </div>
         <Button
           size="large"
           type="button"
@@ -65,6 +117,7 @@ class agentProfile extends Component {
           style={{
             margin: '30px 0 30px 0',
             width: '300px',
+            marginBottom: '70px',
           }}
           className="Button"
         >

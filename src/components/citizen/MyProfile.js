@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Edit from '@material-ui/icons/Edit';
 import InfoUser from './InfoUser';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
+import Coins from '../Coins';
 
 class MyProfile extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class MyProfile extends Component {
     const { history } = this.props;
 
     auth.signOut().then(() => {
-      history.push('/signin');
+      history.push('/home');
     }, (error) => {
       console.log(error);
     });
@@ -68,7 +69,6 @@ class MyProfile extends Component {
 
   render() {
     const { userInfo, error } = this.state;
-    const mapArray = new Array(3).fill(3);
     return (
       <div>
         <ArrowBack
@@ -81,9 +81,10 @@ class MyProfile extends Component {
           <h1>Mon profil</h1>
           <Link to="/changeprofile"><Edit /></Link>
         </div>
-        {mapArray.map(() => (
-          <StarIcon style={{ width: '40px', height: '40px' }} />
-        ))}
+        <p style={{ fontWeight: 'bold', margin: '0' }}>Mes crédits :</p>
+        <Link to="/SpendCredits">
+          <Coins position="center" userInfo={userInfo} />
+        </Link>
         {' '}
         {userInfo
           ? (
@@ -95,12 +96,12 @@ class MyProfile extends Component {
                 onClick={this.logout}
                 variant="contained"
                 style={{
-                  margin: '30px 0 30px 0',
+                  marginBottom: '80px',
                   width: '300px',
                 }}
                 className="Button"
               >
-                Log Out
+                Déconnexion
               </Button>
               {error && <p>{error.message}</p>}
             </>

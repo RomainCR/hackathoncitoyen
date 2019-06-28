@@ -9,27 +9,29 @@ const useStyles = makeStyles({
   card: {
     maxWidth: '15%',
     display: "inline",
+    
 
   },
   media: {
     height: 140,
+    backgroundColor: '#347B98',
   },
 });
 
 export default function MediaCard(props) {
   const classes = useStyles();
-console.log(props)
   return (
     <Grid item xs={6} style={{ border: '1px solid black'}}>
     <Card className={classes.card}>
 
-      <CardActionArea >
+      <CardActionArea style={{ backgroundColor: '#347B98' }} >
         <CardMedia
           className={classes.media}
-          image="https://i.ibb.co/VpJjRmK/picto00.png"
+          image= { props.item.image}
          
         />
-        <p>{props.item.prix}</p>
+        <p style={{ fontSize: '12px'}}>{props.item.nom}</p>
+        <p style={{ fontSize: '15px'}}>{props.item.prix}</p>
       </CardActionArea>
     </Card>
     </Grid>
