@@ -66,7 +66,7 @@ class SpendCredit extends Component {
     return (
       <div>
         <Avatar style={{ marginTop: '20%'}} />
-        <p style={{ marginTop: '15%'}} >Dépenser vos crédits</p>
+        <p style={{ marginTop: '6%'}} >Dépenser vos crédits</p>
         <Coins position="center" userInfo={userInfo} />
         <Grid container>
           {items ? items.map(item => <ItemList key={Math.floor(Math.random()*5000)} item={item} />) : null}{" "}

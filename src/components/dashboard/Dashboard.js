@@ -137,11 +137,11 @@ class Dashboard extends React.Component {
        { user && user.isAgent === false ? <> <Avatar userInfo={userInfo} />
         <Coins position="flex-end" userInfo={userInfo} /> </> : null  }
         {!choice && (
-        <> <h3>UniCity </h3>
+        <> <h3 style={{marginTop: '10%'}}>UniCity </h3>
         <div style={{width: '65px', height : '65px', marginLeft: 'auto', marginRight: 'auto'}}> 
         <img style={{width: '100%', height: '100%'}} src='https://media.discordapp.net/attachments/593438579821248535/593529192453373962/logo.png?width=465&height=468'/>
      </div>
-        <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3> <Button onClick={() => {
+        <h3 style={{ margin: '5%' }}>Help your city, help yourself</h3> <Button onClick={() => {
             this.setState({
               showAll: true,
               choice: 'all'
