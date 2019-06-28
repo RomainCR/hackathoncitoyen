@@ -1,31 +1,9 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import ImageAnonceUpload from './ImageAnnonceUpoad';
 import SelectField from './SelectFields';
 import withFirebaseContext from '../../Firebase/withFirebaseContext';
-import { Container } from '@material-ui/core';
-
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-  },
-  dense: {
-    marginTop: theme.spacing(2),
-  },
-  menu: {
-    width: 200,
-  },
-}));
 
 class CreateAnnonce extends React.Component {
   constructor(props) {
@@ -57,9 +35,13 @@ class CreateAnnonce extends React.Component {
       });
     }
     if (name !== 'points') {
-      this.setState({ thématique: event.target.value });
+      this.setState({ [name]: event.target.value });
     }
   };
+
+  handleThematiqueChange = () => (event) => {
+    this.setState({ thématique: event.target.value });
+  }
 
   getImage = (url) => {
     this.setState({ url });
@@ -153,8 +135,7 @@ class CreateAnnonce extends React.Component {
           required
           id="outlined-required"
           label="Titre"
-          defaultValue="Hello World"
-          // style={{marginLeft: 1, marginRight: 1}}
+          defaultValue="Titre"
           margin="normal"
           variant="outlined"
           value={titre}
@@ -168,7 +149,7 @@ class CreateAnnonce extends React.Component {
             value={description}
             multiline
             rows="5"
-            defaultValue="Default Value"
+            defaultValue="Description"
             margin="normal"
             variant="outlined"
             onChange={this.handleChange('description')}
@@ -195,7 +176,7 @@ class CreateAnnonce extends React.Component {
           <SelectField
             name="Thématique"
             choices={thématiquelist}
-            handleChange={this.handleChange}
+            handleChange={this.handleThematiqueChange}
             value={thématique}
           />
         </div>
