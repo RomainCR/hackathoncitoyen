@@ -86,7 +86,6 @@ class infoUser extends Component {
     if (e.target.checked) {
       // add the numerical value of the checkbox to options array
       thematiques.push(e.target.value);
-      console.log(thematiques);
     } else {
       // or remove the value from the unchecked checkbox from the array
       index = thematiques.indexOf(e.target.value);

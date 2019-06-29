@@ -20,6 +20,7 @@ class SeeAnnounce extends Component {
     this.state = {
       message: '',
       buttonPostuler: 'inline',
+      user: {},
     };
   }
 
@@ -76,7 +77,7 @@ class SeeAnnounce extends Component {
   };
 
   sendMyApplication = () => {
-    const { annonce, apply } = this.state;
+    const { annonce, apply, user } = this.state;
 
     if (
       annonce[0].postulants
@@ -99,6 +100,15 @@ class SeeAnnounce extends Component {
             date: Date(Date.now()).toString(),
           }),
         });
+
+      firebase
+        .firestore()
+        .collection('usersinfo')
+        .doc(localStorage.getItem('userId'))
+        .update({
+          candidatures: firebase.firestore.FieldValue.arrayUnion(id),
+        });
+
       this.setState({
         buttonPostuler: 'none',
         message: 'Votre candidature a bien été prise en compte.',
@@ -110,7 +120,7 @@ class SeeAnnounce extends Component {
       this.setState({
         message: `Vous avez déjà postulé à cette annonce le ${
           date[0].date
-        } , votre candidature sera traitée dans les plus brefs délais.`,
+          } , votre candidature sera traitée dans les plus brefs délais.`,
       });
     }
   };
@@ -171,8 +181,10 @@ class SeeAnnounce extends Component {
             </div>
           </>
         ) : (
-          <p> loading..</p>
-        )}
+            <p> loading..</p>
+          )}
+        {console.log(this.state.user)}
+
         {' '}
         {annonce ? (
           user[0].isAgent === false ? (
