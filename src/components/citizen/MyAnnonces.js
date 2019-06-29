@@ -74,7 +74,7 @@ class MyAnnonces extends Component {
   render() {
     const { annonces, myannonces } = this.state;
     return (
-      <div>
+      <div style={{ marginBottom: '70px' }}>
         <h1>Les annonces auxquelles j&apos;ai postulé</h1>
         {annonces.length > 0 && annonces.filter(annonce => myannonces.includes(annonce.id))
           .map(annonce => (
