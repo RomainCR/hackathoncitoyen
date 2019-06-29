@@ -71,19 +71,22 @@ class MyProfile extends Component {
     return (
       <div>
         <ArrowBack
-          style={{ position: 'fixed', left: '10%', top: '2%' }}
+          style={{ marginBottom: '70px', position: 'fixed', left: '10%', top: '2%' }}
           onClick={() => {
             this.redirect('/dashboard');
           }}
         />
-        <div style={{ display: 'flex', marginBottom: '70px', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <h1>Mon profil</h1>
           <Link to="/changeprofile"><Edit /></Link>
         </div>
-        <p>Voir les annonces où j&apos;ai postulé</p>
         <p style={{ fontWeight: 'bold', margin: '0' }}>Mes crédits :</p>
         <Link to="/SpendCredits">
           <Coins position="center" userInfo={userInfo} />
+        </Link>
+        {' '}
+        <Link to="/myannonces">
+          <p style={{ color: 'black' }}>Voir les annonces auxquelles j&apos;ai postulé</p>
         </Link>
         {' '}
         {userInfo

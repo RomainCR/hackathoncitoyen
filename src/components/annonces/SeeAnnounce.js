@@ -100,13 +100,15 @@ class SeeAnnounce extends Component {
             date: Date(Date.now()).toString(),
           }),
         });
-        firebase
+
+      firebase
         .firestore()
         .collection('usersinfo')
-        .doc(user.uid)
+        .doc(localStorage.getItem('userId'))
         .update({
           candidatures: firebase.firestore.FieldValue.arrayUnion(id),
         });
+
       this.setState({
         buttonPostuler: 'none',
         message: 'Votre candidature a bien été prise en compte.',

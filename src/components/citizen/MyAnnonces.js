@@ -8,11 +8,48 @@ class MyAnnonces extends Component {
     super(props);
     this.state = {
       annonces: [],
+      myannonces: [],
     };
   }
 
   componentDidMount() {
+    this.getInfo();
     this.getAnnounceFromDB();
+  }
+
+  getInfo = () => {
+    const { firestore, auth } = this.props;
+    let docRef;
+    if (localStorage.getItem('userId')) {
+      docRef = firestore.doc(`usersinfo/${localStorage.getItem('userId')}`);
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          docRef = firestore.doc(`usersinfo/${user.uid}`);
+          docRef.get().then((doc) => {
+            if (doc.exists) {
+              const userInfo = doc.data();
+              this.setState({
+                myannonces: userInfo.candidatures,
+              });
+            }
+          });
+        }
+      });
+    } else {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          docRef = firestore.doc(`usersinfo/${user.uid}`);
+          docRef.get().then((doc) => {
+            if (doc.exists) {
+              const userInfo = doc.data();
+              this.setState({
+                myannonces: userInfo.candidatures,
+              });
+            }
+          });
+        }
+      });
+    }
   }
 
   getAnnounceFromDB = () => {
@@ -35,12 +72,14 @@ class MyAnnonces extends Component {
   };
 
   render() {
-    const { annonces } = this.state;
+    const { annonces, myannonces } = this.state;
     return (
       <div>
-        {annonces.length > 0 && annonces.map(annonce => annonce.data.postulants)
-          .map(annonce => annonce.map(one => one.id)
-          .map(id => id === localStorage.getItem('userId'))).map(test => console.log(test))}         
+        <h1>Les annonces auxquelles j&apos;ai postulé</h1>
+        {annonces.length > 0 && annonces.filter(annonce => myannonces.includes(annonce.id))
+          .map(annonce => (
+            <ListAnnonce annonce={annonce} />
+          ))}
       </div>
     );
   }
