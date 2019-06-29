@@ -49,7 +49,7 @@ const App = () => (
           <Route path="/annonce/:annonceid?" component={SeeAnnounce} />
           <Route path="/createAnnonceUser" component={CreateAnnonceUser} />
           <Route path="/SpendCredits" component={SpendCredits} />
-          <Route path="/SendCredits/:montant" component={SendCredits} />
+          <Route path="/SendCredits/:montant/:id?" component={SendCredits} />
         </Switch>
         {' '}
         <BottomNav />

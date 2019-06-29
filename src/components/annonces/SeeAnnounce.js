@@ -118,7 +118,7 @@ class SeeAnnounce extends Component {
       this.setState({
         message: `Vous avez déjà postulé à cette annonce le ${
           date[0].date
-        } , votre candidature sera traitée dans les plus brefs délais.`,
+          } , votre candidature sera traitée dans les plus brefs délais.`,
       });
     }
   };
@@ -179,8 +179,10 @@ class SeeAnnounce extends Component {
             </div>
           </>
         ) : (
-          <p> loading..</p>
-        )}
+            <p> loading..</p>
+          )}
+        {console.log(this.state.user)}
+
         {' '}
         {annonce ? (
           user[0].isAgent === false ? (

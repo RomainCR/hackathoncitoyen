@@ -86,6 +86,7 @@ class Signin extends Component {
       email,
       credits: 0,
       hasCompetences: false,
+      myannonces: [],
       adress,
       isAgent,
       uid: user.uid,

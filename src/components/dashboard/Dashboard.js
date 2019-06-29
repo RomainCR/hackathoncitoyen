@@ -137,13 +137,13 @@ class Dashboard extends React.Component {
         {!choice && (
           <>
             <div style={{ width: '65px', height: '65px', marginLeft: 'auto', marginRight: 'auto', marginTop: '15px' }}>
-              <img style={{ width: '100%', height: '100%' }} src='https://media.discordapp.net/attachments/593438579821248535/593529192453373962/logo.png?width=465&height=468' />
+              <img style={{ width: '100%', height: '100%',  }} src='https://media.discordapp.net/attachments/593438579821248535/593529192453373962/logo.png?width=465&height=468' />
             </div>
-            <h3 style={{ margin: '1%' }}>Help your city, help yourself</h3>
+            <h3 style={{ margin: '5%' }}>Help your city, help yourself</h3>
             <p style={{ fontSize: '0.9em' }}>
               {userInfo && userInfo.isAgent ? "Trouvez un profil pour aider la communauté" : "Touvez une annonce pour aider votre communauté"}
             </p>
-            <Button style={{ marginBottom: '8px', border: "solid 1px #656a6b" }} onClick={() => {
+            <Button style={{ marginBottom: '10px', border: "solid 1px #656a6b" }} onClick={() => {
               this.setState({
                 showAll: true,
                 choice: 'all'
