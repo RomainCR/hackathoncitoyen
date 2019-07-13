@@ -90,6 +90,7 @@ export default function UserProfile(props) {
           }}
           >
             <Typography variant="body2" color="textSecondary">
+              <h4>Compétences</h4>
               {user && user.data.competences.map(comp => (
                 <img
                   alt={comp}
